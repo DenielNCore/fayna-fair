@@ -8,6 +8,11 @@ export default defineNuxtConfig({
   app: {
     baseURL: process.env.NODE_ENV === 'production' ? '/fayna-fair/' : '/',
     buildAssetsDir: '/_nuxt/',
+    head: {
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5' },
+      ],
+    },
   },
 
   modules: [

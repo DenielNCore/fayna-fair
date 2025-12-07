@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col items-center justify-center">
     <!-- Logo Icon with Christmas/Charity theme -->
-    <div class="relative mb-4">
-      <div class="relative w-24 h-24">
+    <div class="relative mb-3 sm:mb-4">
+      <div class="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24">
         <!-- Main circle with gradient -->
         <div class="absolute inset-0 bg-gradient-to-br from-amber-400 via-orange-500 to-red-500 rounded-full shadow-2xl transform rotate-3 hover:rotate-6 transition-transform duration-300" />
         <!-- Inner decorative circle -->
@@ -22,13 +22,13 @@
       </div>
     </div>
     <!-- Logo Text -->
-    <div class="text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-2">
+    <div class="text-center px-2">
+      <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-1 sm:mb-2">
         <span class="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
           Файний Ярмарок
         </span>
       </h1>
-      <div class="flex items-center justify-center gap-2 text-sm md:text-base text-gray-600 font-medium">
+      <div class="flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm md:text-base text-gray-600 font-medium">
         <svg
           class="w-4 h-4 text-amber-500"
           fill="currentColor"

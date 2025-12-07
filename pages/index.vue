@@ -6,15 +6,15 @@
       <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-orange-200/30 rounded-full blur-3xl" />
     </div>
 
-    <div class="relative max-w-5xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <div class="relative max-w-5xl mx-auto py-6 sm:py-8 md:py-12 px-4 sm:px-6 lg:px-8">
       <!-- Logo and Header -->
-      <div class="text-center mb-12">
+      <div class="text-center mb-6 sm:mb-8 md:mb-12">
         <FairLogo />
-        <div class="mt-8">
-          <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
+        <div class="mt-4 sm:mt-6 md:mt-8">
+          <h2 class="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-3 px-2">
             Реєстрація на благодійні активності
           </h2>
-          <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-md">
+          <div class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-md text-sm sm:text-base">
             <svg
               class="w-5 h-5 text-amber-600"
               fill="none"
@@ -36,11 +36,11 @@
       </div>
 
       <!-- Instructions Card -->
-      <div class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8 mb-8 border border-white/50">
-        <div class="flex items-start gap-3 mb-4">
-          <div class="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center">
+      <div class="bg-white/90 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 border border-white/50">
+        <div class="flex items-start gap-2 sm:gap-3 mb-3 sm:mb-4">
+          <div class="flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center">
             <svg
-              class="w-6 h-6 text-white"
+              class="w-5 h-5 sm:w-6 sm:h-6 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -53,25 +53,25 @@
               />
             </svg>
           </div>
-          <div class="flex-1">
-            <h3 class="text-xl font-bold text-gray-900 mb-3">
+          <div class="flex-1 min-w-0">
+            <h3 class="text-lg sm:text-xl font-bold text-gray-900 mb-2 sm:mb-3">
               Як забронювати місце?
             </h3>
-            <ul class="space-y-3 text-gray-700">
-              <li class="flex items-start gap-3">
-                <span class="flex-shrink-0 w-6 h-6 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">
+            <ul class="space-y-2 sm:space-y-3 text-sm sm:text-base text-gray-700">
+              <li class="flex items-start gap-2 sm:gap-3">
+                <span class="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-amber-100 text-amber-700 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold mt-0.5">
                   1
                 </span>
-                <span>Відмітьте бажані активності в формі нижче та надішліть її*</span>
+                <span class="flex-1">Відмітьте бажані активності в формі нижче та надішліть її*</span>
               </li>
-              <li class="flex items-start gap-3">
-                <span class="flex-shrink-0 w-6 h-6 bg-orange-100 text-orange-700 rounded-full flex items-center justify-center text-sm font-semibold mt-0.5">
+              <li class="flex items-start gap-2 sm:gap-3">
+                <span class="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 bg-orange-100 text-orange-700 rounded-full flex items-center justify-center text-xs sm:text-sm font-semibold mt-0.5">
                   2
                 </span>
-                <span>Оплатіть вартість участі (інформацію про банку для оплати кожного майстер-класу/активності очікуйте від наших волонтерів)</span>
+                <span class="flex-1">Оплатіть вартість участі (інформацію про банку для оплати кожного майстер-класу/активності очікуйте від наших волонтерів)</span>
               </li>
             </ul>
-            <p class="text-sm text-gray-500 mt-4 italic bg-gray-50 p-3 rounded-lg">
+            <p class="text-xs sm:text-sm text-gray-500 mt-3 sm:mt-4 italic bg-gray-50 p-2 sm:p-3 rounded-lg">
               * при реєстрації декількох осіб, будь ласка, заповнюйте форму на кожного окремо
             </p>
           </div>
@@ -80,14 +80,14 @@
 
       <!-- Registration Form -->
       <form
-        class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl p-6 md:p-8 border border-white/50"
+        class="bg-white/90 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl p-4 sm:p-6 md:p-8 border border-white/50"
         @submit.prevent="handleSubmit"
       >
         <!-- Personal Information -->
-        <div class="mb-10">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-1 h-8 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full" />
-            <h3 class="text-2xl font-bold text-gray-900">
+        <div class="mb-6 sm:mb-8 md:mb-10">
+          <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div class="w-1 h-6 sm:h-8 bg-gradient-to-b from-amber-500 to-orange-500 rounded-full" />
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
               Ваші контактні дані
             </h3>
           </div>
@@ -96,14 +96,14 @@
             <div class="md:col-span-2">
               <label
                 for="name"
-                class="block text-sm font-semibold text-gray-700 mb-2"
+                class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2"
               >
                 Ваше ім'я та прізвище <span class="text-red-500">*</span>
               </label>
               <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                   <svg
-                    class="h-5 w-5 text-gray-400"
+                    class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -121,7 +121,7 @@
                   v-model="form.name"
                   type="text"
                   required
-                  class="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all bg-white"
+                  class="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-3.5 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all bg-white"
                   placeholder="Введіть ваше ім'я та прізвище"
                 >
               </div>
@@ -148,14 +148,14 @@
             <div class="md:col-span-2">
               <label
                 for="phone"
-                class="block text-sm font-semibold text-gray-700 mb-2"
+                class="block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2"
               >
                 Контактний номер телефону <span class="text-red-500">*</span>
               </label>
               <div class="relative">
-                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <div class="absolute inset-y-0 left-0 pl-3 sm:pl-4 flex items-center pointer-events-none">
                   <svg
-                    class="h-5 w-5 text-gray-400"
+                    class="h-4 w-4 sm:h-5 sm:w-5 text-gray-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -173,7 +173,7 @@
                   v-model="form.phone"
                   type="tel"
                   required
-                  class="w-full pl-12 pr-4 py-3.5 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all bg-white"
+                  class="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-3.5 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all bg-white"
                   placeholder="+380 XX XXX XX XX"
                 >
               </div>
@@ -199,24 +199,24 @@
         </div>
 
         <!-- Activities -->
-        <div class="mb-10">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-1 h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full" />
-            <h3 class="text-2xl font-bold text-gray-900">
+        <div class="mb-6 sm:mb-8 md:mb-10">
+          <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div class="w-1 h-6 sm:h-8 bg-gradient-to-b from-orange-500 to-red-500 rounded-full" />
+            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">
               Оберіть активності
             </h3>
           </div>
-          <div class="space-y-8">
+          <div class="space-y-6 sm:space-y-8">
             <!-- Activity Group by Date -->
             <div
               v-for="(dateActivities, date) in activitiesByDate"
               :key="date"
               class="relative"
             >
-              <div class="flex items-center gap-4 mb-4">
-                <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl flex items-center justify-center shadow-lg">
+              <div class="flex items-center gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
+                <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
                   <svg
-                    class="w-6 h-6 text-white"
+                    class="w-5 h-5 sm:w-6 sm:h-6 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -229,45 +229,45 @@
                     />
                   </svg>
                 </div>
-                <h4 class="text-xl font-bold text-gray-900">
+                <h4 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 break-words">
                   {{ date }}
                 </h4>
               </div>
-              <div class="space-y-3">
+              <div class="space-y-2 sm:space-y-3">
                 <div
                   v-for="activity in dateActivities"
                   :key="activity.id"
-                  class="group relative bg-gradient-to-br from-gray-50 to-white rounded-xl p-5 border-2 border-gray-200 hover:border-amber-400 hover:shadow-lg transition-all duration-300"
+                  class="group relative bg-gradient-to-br from-gray-50 to-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border-2 border-gray-200 hover:border-amber-400 hover:shadow-lg transition-all duration-300"
                 >
-                  <label class="flex items-start cursor-pointer gap-4">
-                    <div class="flex-shrink-0 pt-1">
+                  <label class="flex items-start cursor-pointer gap-2 sm:gap-3 md:gap-4">
+                    <div class="flex-shrink-0 pt-0.5 sm:pt-1">
                       <input
                         v-model="form.selectedActivities"
                         :value="activity.id"
                         type="checkbox"
-                        class="w-5 h-5 text-amber-600 focus:ring-amber-500 border-gray-300 rounded focus:ring-2"
+                        class="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 focus:ring-amber-500 border-gray-300 rounded focus:ring-2"
                       >
                     </div>
                     <div class="flex-1 min-w-0">
-                      <div class="flex items-start justify-between gap-4 mb-3">
-                        <div class="flex-1">
-                          <p class="font-bold text-gray-900 text-lg mb-1">
+                      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3">
+                        <div class="flex-1 min-w-0">
+                          <p class="font-bold text-gray-900 text-sm sm:text-base md:text-lg mb-1 break-words">
                             {{ activity.title }}
                           </p>
                           <p
                             v-if="activity.organizer"
-                            class="text-sm text-amber-600 font-semibold"
+                            class="text-xs sm:text-sm text-amber-600 font-semibold"
                           >
                             {{ activity.organizer }}
                           </p>
                         </div>
                         <div class="flex-shrink-0">
-                          <span class="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md">
+                          <span class="inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md whitespace-nowrap">
                             {{ activity.price }}
                           </span>
                         </div>
                       </div>
-                      <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                      <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm text-gray-600">
                         <span class="flex items-center gap-1.5">
                           <svg
                             class="w-4 h-4 text-amber-500"
@@ -326,15 +326,15 @@
         </div>
 
         <!-- Terms Checkbox -->
-        <div class="mb-8 p-5 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-xl">
-          <label class="flex items-start cursor-pointer gap-3">
+        <div class="mb-6 sm:mb-8 p-3 sm:p-4 md:p-5 bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200 rounded-lg sm:rounded-xl">
+          <label class="flex items-start cursor-pointer gap-2 sm:gap-3">
             <input
               v-model="form.termsAccepted"
               type="checkbox"
               required
-              class="mt-1 w-5 h-5 text-amber-600 focus:ring-amber-500 border-gray-300 rounded focus:ring-2"
+              class="mt-0.5 sm:mt-1 w-4 h-4 sm:w-5 sm:h-5 text-amber-600 focus:ring-amber-500 border-gray-300 rounded focus:ring-2 flex-shrink-0"
             >
-            <span class="text-sm text-gray-700 leading-relaxed">
+            <span class="text-xs sm:text-sm text-gray-700 leading-relaxed">
               Я розумію, що усі активності є благодійними і в разі відмови після оплати бронювання місця, гроші не повертаються.
               <span class="text-red-500 font-semibold">*</span>
             </span>
@@ -342,11 +342,11 @@
         </div>
 
         <!-- Submit Button -->
-        <div class="flex justify-end">
+        <div class="flex justify-center sm:justify-end">
           <button
             type="submit"
             :disabled="isSubmitting"
-            class="group relative px-8 py-4 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white font-bold rounded-xl hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-amber-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 overflow-hidden"
+            class="group relative w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 text-white font-bold rounded-lg sm:rounded-xl hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-4 focus:ring-amber-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 transition-all duration-300 overflow-hidden"
           >
             <span class="relative z-10 flex items-center gap-2">
               <span v-if="!isSubmitting">Надіслати форму</span>
@@ -389,11 +389,11 @@
       >
         <div
           v-if="showSuccess"
-          class="mt-8 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-2xl p-8 text-center shadow-xl"
+          class="mt-6 sm:mt-8 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-200 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 text-center shadow-xl"
         >
-          <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full mb-4 shadow-lg">
+          <div class="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-full mb-3 sm:mb-4 shadow-lg">
             <svg
-              class="w-8 h-8 text-white"
+              class="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -406,10 +406,10 @@
               />
             </svg>
           </div>
-          <h3 class="text-2xl font-bold text-green-800 mb-2">
+          <h3 class="text-lg sm:text-xl md:text-2xl font-bold text-green-800 mb-2">
             Форму успішно відправлено!
           </h3>
-          <p class="text-green-700 text-lg">
+          <p class="text-green-700 text-sm sm:text-base md:text-lg">
             Дякуємо за реєстрацію. Наші волонтери зв'яжуться з вами для підтвердження та оплати.
           </p>
         </div>
