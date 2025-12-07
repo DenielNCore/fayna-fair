@@ -1,3 +1,237 @@
+<script setup lang="ts">
+    interface Activity {
+        id: string
+        date: string
+        time: string
+        title: string
+        organizer?: string
+        price: string
+        age: string
+        spots: string
+        duration: string
+    }
+
+    interface FormData {
+        name: string
+        phone: string
+        selectedActivities: string[]
+        termsAccepted: boolean
+    }
+
+    const form = reactive<FormData>({
+        name: '',
+        phone: '',
+        selectedActivities: [],
+        termsAccepted: false,
+    })
+
+    const errors = reactive({
+        name: '',
+        phone: '',
+    })
+
+    const isSubmitting = ref(false)
+    const showSuccess = ref(false)
+
+    // Collapsible dates state - all expanded by default
+    const expandedDates = reactive<Record<string, boolean>>({})
+
+
+    // Toggle date expansion
+    const toggleDate = (date: string) => {
+        expandedDates[date] = !expandedDates[date]
+    }
+
+    // Activities data
+    const activities: Activity[] = [
+        {
+        id: '1',
+        date: '14.12.2025 (неділя)',
+        time: '12:00 - 14:00',
+        title: 'Творча зустріч. Майстер-клас з виготовлення брелока',
+        organizer: 'CoffeeTunes',
+        price: '800 грн',
+        age: '6+',
+        spots: '7',
+        duration: '2 години',
+        },
+        {
+        id: '2',
+        date: '16.12.2025 (вівторок)',
+        time: '18:00 - 20:00',
+        title: 'Гра на соціальну дедукцію "Кров на годинниковій вежі"',
+        organizer: 'Gараж',
+        price: 'донат від 500 грн',
+        age: '18+',
+        spots: '15',
+        duration: '2 години',
+        },
+        {
+        id: '3',
+        date: '16.12.2025 (вівторок)',
+        time: '20:00 - 22:00',
+        title: 'Гра на соціальну дедукцію "Кров на годинниковій вежі"',
+        organizer: 'Gараж',
+        price: 'донат від 500 грн',
+        age: '18+',
+        spots: '15',
+        duration: '2 години',
+        },
+        {
+        id: '4',
+        date: '16.12.2025 (вівторок)',
+        time: '19:00 - 21:00',
+        title: 'Майстер-клас із створення різдвяного віночка',
+        organizer: 'TserTsek',
+        price: '2500 грн',
+        age: '16+',
+        spots: '8',
+        duration: '2 години',
+        },
+        {
+        id: '5',
+        date: '17.12.2025 (середа)',
+        time: '18:00 - 19:00',
+        title: 'Виготовлення маски "Різдвяна коза"',
+        organizer: 'БоХліб',
+        price: '500 грн',
+        age: '8+',
+        spots: '8',
+        duration: '1 година',
+        },
+        {
+        id: '6',
+        date: '17.12.2025 (середа)',
+        time: '19:00 - 22:00',
+        title: 'Майстер-клас "Мініатюрна шафа дивовиж"',
+        organizer: 'Місцеві',
+        price: '800 грн',
+        age: '14+',
+        spots: '8',
+        duration: '3 години',
+        },
+        {
+        id: '7',
+        date: '18.12.2025 (четвер)',
+        time: '17:00 - 20:00',
+        title: 'Художній майстер-клас по створенню новорічної листівки',
+        organizer: 'Cactus',
+        price: '500 грн',
+        age: '8+',
+        spots: '10',
+        duration: '3 години',
+        },
+        {
+        id: '8',
+        date: '21.12.2025 (неділя)',
+        time: '12:00 - 14:00',
+        title: 'Майстер-клас по виготовленню новорічної POP-UP листівки',
+        organizer: 'Місцеві',
+        price: '700 грн',
+        age: '10+',
+        spots: '8',
+        duration: '2 години',
+        },
+    ]
+
+    // Group activities by date
+    const activitiesByDate = computed(() => {
+        const grouped: Record<string, Activity[]> = {}
+        activities.forEach((activity) => {
+        if (!grouped[activity.date]) {
+            grouped[activity.date] = []
+        }
+        grouped[activity.date].push(activity)
+        })
+        return grouped
+    })
+
+
+    // Initialize all dates as expanded when activities are loaded
+    watchEffect(() => {
+        const dates = Object.keys(activitiesByDate.value)
+        dates.forEach((date) => {
+        if (!(date in expandedDates)) {
+            expandedDates[date] = true
+        }
+        })
+    })
+
+    // Validation
+    const validateForm = (): boolean => {
+        errors.name = ''
+        errors.phone = ''
+
+        if (!form.name.trim()) {
+        errors.name = 'Ім\'я та прізвище обов\'язкові'
+        return false
+        }
+
+        if (!form.phone.trim()) {
+        errors.phone = 'Номер телефону обов\'язковий'
+        return false
+        }
+
+        const phoneRegex = /^[\d\s+\-()]+$/
+        if (!phoneRegex.test(form.phone)) {
+        errors.phone = 'Введіть коректний номер телефону'
+        return false
+        }
+
+        return true
+    }
+
+    // Handle form submission
+    const handleSubmit = async () => {
+        if (!validateForm()) {
+        return
+        }
+
+        if (form.selectedActivities.length === 0) {
+        alert('Будь ласка, оберіть хоча б одну активність')
+        return
+        }
+
+        isSubmitting.value = true
+
+        try {
+        // Here you would typically send data to PocketBase or your backend
+        // const pb = usePocketBase()
+        // await pb.collection('registrations').create({
+        //   name: form.name,
+        //   phone: form.phone,
+        //   activities: form.selectedActivities,
+        //   termsAccepted: form.termsAccepted,
+        // })
+
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000))
+
+        // Show success message
+        showSuccess.value = true
+
+        // Reset form
+        form.name = ''
+        form.phone = ''
+        form.selectedActivities = []
+        form.termsAccepted = false
+
+        // Scroll to success message
+        setTimeout(() => {
+            const successElement = document.querySelector('.bg-gradient-to-br.from-green-50')
+            successElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
+        }
+        catch (error) {
+        console.error('Error submitting form:', error)
+        alert('Помилка при відправці форми. Спробуйте ще раз.')
+        }
+        finally {
+        isSubmitting.value = false
+        }
+    }
+</script>
+
 <template>
   <div class="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
     <!-- Decorative background elements -->
@@ -211,12 +445,40 @@
             <div
               v-for="(dateActivities, date) in activitiesByDate"
               :key="date"
-              class="relative"
+              class="relative bg-white/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border-2 border-gray-200 overflow-hidden"
             >
-              <div class="flex items-center gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
-                <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
+              <button
+                type="button"
+                class="w-full flex items-center justify-between gap-2 sm:gap-3 md:gap-4 p-3 sm:p-4 hover:bg-gray-50/50 transition-colors"
+                @click="toggleDate(date)"
+              >
+                <div class="flex items-center gap-2 sm:gap-3 md:gap-4 flex-1 min-w-0">
+                  <div class="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-amber-400 to-orange-500 rounded-lg sm:rounded-xl flex items-center justify-center shadow-lg">
+                    <svg
+                      class="w-5 h-5 sm:w-6 sm:h-6 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </div>
+                  <h4 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 break-words text-left">
+                    {{ date }}
+                  </h4>
+                  <span class="text-xs sm:text-sm text-gray-500 font-medium flex-shrink-0">
+                    ({{ dateActivities.length }} {{ dateActivities.length === 1 ? 'активність' : 'активностей' }})
+                  </span>
+                </div>
+                <div class="flex-shrink-0">
                   <svg
-                    class="w-5 h-5 sm:w-6 sm:h-6 text-white"
+                    class="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 transition-transform duration-300"
+                    :class="{ 'rotate-180': expandedDates[date] }"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -225,102 +487,113 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      d="M19 9l-7 7-7-7"
                     />
                   </svg>
                 </div>
-                <h4 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 break-words">
-                  {{ date }}
-                </h4>
-              </div>
-              <div class="space-y-2 sm:space-y-3">
+              </button>
+              <Transition
+                enter-active-class="transition-all duration-300 ease-out"
+                enter-from-class="opacity-0 max-h-0"
+                enter-to-class="opacity-100 max-h-[5000px]"
+                leave-active-class="transition-all duration-300 ease-in"
+                leave-from-class="opacity-100 max-h-[5000px]"
+                leave-to-class="opacity-0 max-h-0"
+              >
                 <div
-                  v-for="activity in dateActivities"
-                  :key="activity.id"
-                  class="group relative bg-gradient-to-br from-gray-50 to-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border-2 border-gray-200 hover:border-amber-400 hover:shadow-lg transition-all duration-300"
+                  v-show="expandedDates[date]"
+                  class="overflow-hidden"
                 >
-                  <label class="flex items-start cursor-pointer gap-2 sm:gap-3 md:gap-4">
-                    <div class="flex-shrink-0 pt-0.5 sm:pt-1">
-                      <input
-                        v-model="form.selectedActivities"
-                        :value="activity.id"
-                        type="checkbox"
-                        class="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 focus:ring-amber-500 border-gray-300 rounded focus:ring-2"
-                      >
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3">
+                  <div class="p-3 sm:p-4 space-y-2 sm:space-y-3">
+                    <div
+                      v-for="activity in dateActivities"
+                      :key="activity.id"
+                      class="group relative bg-gradient-to-br from-gray-50 to-white rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 border-2 border-gray-200 hover:border-amber-400 hover:shadow-lg transition-all duration-300"
+                    >
+                      <label class="flex items-start cursor-pointer gap-2 sm:gap-3 md:gap-4">
+                        <div class="flex-shrink-0 pt-0.5 sm:pt-1">
+                          <input
+                            v-model="form.selectedActivities"
+                            :value="activity.id"
+                            type="checkbox"
+                            class="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 focus:ring-amber-500 border-gray-300 rounded focus:ring-2"
+                          >
+                        </div>
                         <div class="flex-1 min-w-0">
-                          <p class="font-bold text-gray-900 text-sm sm:text-base md:text-lg mb-1 break-words">
-                            {{ activity.title }}
-                          </p>
-                          <p
-                            v-if="activity.organizer"
-                            class="text-xs sm:text-sm text-amber-600 font-semibold"
-                          >
-                            {{ activity.organizer }}
-                          </p>
+                          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-3">
+                            <div class="flex-1 min-w-0">
+                              <p class="font-bold text-gray-900 text-sm sm:text-base md:text-lg mb-1 break-words">
+                                {{ activity.title }}
+                              </p>
+                              <p
+                                v-if="activity.organizer"
+                                class="text-xs sm:text-sm text-amber-600 font-semibold"
+                              >
+                                {{ activity.organizer }}
+                              </p>
+                            </div>
+                            <div class="flex-shrink-0">
+                              <span class="inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md whitespace-nowrap">
+                                {{ activity.price }}
+                              </span>
+                            </div>
+                          </div>
+                          <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm text-gray-600">
+                            <span class="flex items-center gap-1.5">
+                              <svg
+                                class="w-4 h-4 text-amber-500"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                />
+                              </svg>
+                              <span class="font-medium">{{ activity.time }}</span>
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                              <svg
+                                class="w-4 h-4 text-orange-500"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                />
+                              </svg>
+                              <span class="font-medium">Вік: {{ activity.age }}</span>
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                              <svg
+                                class="w-4 h-4 text-red-500"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                />
+                              </svg>
+                              <span class="font-medium">Місць: {{ activity.spots }}</span>
+                            </span>
+                          </div>
                         </div>
-                        <div class="flex-shrink-0">
-                          <span class="inline-flex items-center px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md whitespace-nowrap">
-                            {{ activity.price }}
-                          </span>
-                        </div>
-                      </div>
-                      <div class="flex flex-wrap gap-2 sm:gap-3 md:gap-4 text-xs sm:text-sm text-gray-600">
-                        <span class="flex items-center gap-1.5">
-                          <svg
-                            class="w-4 h-4 text-amber-500"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                          <span class="font-medium">{{ activity.time }}</span>
-                        </span>
-                        <span class="flex items-center gap-1.5">
-                          <svg
-                            class="w-4 h-4 text-orange-500"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                          </svg>
-                          <span class="font-medium">Вік: {{ activity.age }}</span>
-                        </span>
-                        <span class="flex items-center gap-1.5">
-                          <svg
-                            class="w-4 h-4 text-red-500"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                            />
-                          </svg>
-                          <span class="font-medium">Місць: {{ activity.spots }}</span>
-                        </span>
-                      </div>
+                      </label>
                     </div>
-                  </label>
+                  </div>
                 </div>
-              </div>
+              </Transition>
             </div>
           </div>
         </div>
@@ -418,216 +691,4 @@
   </div>
 </template>
 
-<script setup lang="ts">
-interface Activity {
-  id: string
-  date: string
-  time: string
-  title: string
-  organizer?: string
-  price: string
-  age: string
-  spots: string
-  duration: string
-}
 
-interface FormData {
-  name: string
-  phone: string
-  selectedActivities: string[]
-  termsAccepted: boolean
-}
-
-const form = reactive<FormData>({
-  name: '',
-  phone: '',
-  selectedActivities: [],
-  termsAccepted: false,
-})
-
-const errors = reactive({
-  name: '',
-  phone: '',
-})
-
-const isSubmitting = ref(false)
-const showSuccess = ref(false)
-
-// Activities data
-const activities: Activity[] = [
-  {
-    id: '1',
-    date: '14.12.2025 (неділя)',
-    time: '12:00 - 14:00',
-    title: 'Творча зустріч. Майстер-клас з виготовлення брелока',
-    organizer: 'CoffeeTunes',
-    price: '800 грн',
-    age: '6+',
-    spots: '7',
-    duration: '2 години',
-  },
-  {
-    id: '2',
-    date: '16.12.2025 (вівторок)',
-    time: '18:00 - 20:00',
-    title: 'Гра на соціальну дедукцію "Кров на годинниковій вежі"',
-    organizer: 'Gараж',
-    price: 'донат від 500 грн',
-    age: '18+',
-    spots: '15',
-    duration: '2 години',
-  },
-  {
-    id: '3',
-    date: '16.12.2025 (вівторок)',
-    time: '20:00 - 22:00',
-    title: 'Гра на соціальну дедукцію "Кров на годинниковій вежі"',
-    organizer: 'Gараж',
-    price: 'донат від 500 грн',
-    age: '18+',
-    spots: '15',
-    duration: '2 години',
-  },
-  {
-    id: '4',
-    date: '16.12.2025 (вівторок)',
-    time: '19:00 - 21:00',
-    title: 'Майстер-клас із створення різдвяного віночка',
-    organizer: 'TserTsek',
-    price: '2500 грн',
-    age: '16+',
-    spots: '8',
-    duration: '2 години',
-  },
-  {
-    id: '5',
-    date: '17.12.2025 (середа)',
-    time: '18:00 - 19:00',
-    title: 'Виготовлення маски "Різдвяна коза"',
-    organizer: 'БоХліб',
-    price: '500 грн',
-    age: '8+',
-    spots: '8',
-    duration: '1 година',
-  },
-  {
-    id: '6',
-    date: '17.12.2025 (середа)',
-    time: '19:00 - 22:00',
-    title: 'Майстер-клас "Мініатюрна шафа дивовиж"',
-    organizer: 'Місцеві',
-    price: '800 грн',
-    age: '14+',
-    spots: '8',
-    duration: '3 години',
-  },
-  {
-    id: '7',
-    date: '18.12.2025 (четвер)',
-    time: '17:00 - 20:00',
-    title: 'Художній майстер-клас по створенню новорічної листівки',
-    organizer: 'Cactus',
-    price: '500 грн',
-    age: '8+',
-    spots: '10',
-    duration: '3 години',
-  },
-  {
-    id: '8',
-    date: '21.12.2025 (неділя)',
-    time: '12:00 - 14:00',
-    title: 'Майстер-клас по виготовленню новорічної POP-UP листівки',
-    organizer: 'Місцеві',
-    price: '700 грн',
-    age: '10+',
-    spots: '8',
-    duration: '2 години',
-  },
-]
-
-// Group activities by date
-const activitiesByDate = computed(() => {
-  const grouped: Record<string, Activity[]> = {}
-  activities.forEach((activity) => {
-    if (!grouped[activity.date]) {
-      grouped[activity.date] = []
-    }
-    grouped[activity.date].push(activity)
-  })
-  return grouped
-})
-
-// Validation
-const validateForm = (): boolean => {
-  errors.name = ''
-  errors.phone = ''
-
-  if (!form.name.trim()) {
-    errors.name = 'Ім\'я та прізвище обов\'язкові'
-    return false
-  }
-
-  if (!form.phone.trim()) {
-    errors.phone = 'Номер телефону обов\'язковий'
-    return false
-  }
-
-  const phoneRegex = /^[\d\s+\-()]+$/
-  if (!phoneRegex.test(form.phone)) {
-    errors.phone = 'Введіть коректний номер телефону'
-    return false
-  }
-
-  return true
-}
-
-// Handle form submission
-const handleSubmit = async () => {
-  if (!validateForm()) {
-    return
-  }
-
-  if (form.selectedActivities.length === 0) {
-    alert('Будь ласка, оберіть хоча б одну активність')
-    return
-  }
-
-  isSubmitting.value = true
-
-  try {
-    // Here you would typically send data to PocketBase or your backend
-    // const pb = usePocketBase()
-    // await pb.collection('registrations').create({
-    //   name: form.name,
-    //   phone: form.phone,
-    //   activities: form.selectedActivities,
-    //   termsAccepted: form.termsAccepted,
-    // })
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000))
-
-    // Show success message
-    showSuccess.value = true
-
-    // Reset form
-    form.name = ''
-    form.phone = ''
-    form.selectedActivities = []
-    form.termsAccepted = false
-
-    // Scroll to success message
-    setTimeout(() => {
-      const successElement = document.querySelector('.bg-gradient-to-br.from-green-50')
-      successElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 100)
-  }
-  catch (error) {
-    console.error('Error submitting form:', error)
-    alert('Помилка при відправці форми. Спробуйте ще раз.')
-  }
-  finally {
-    isSubmitting.value = false
-  }
-}
-</script>
