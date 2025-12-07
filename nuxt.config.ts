@@ -1,0 +1,41 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  compatibilityDate: '2024-04-03',
+  devtools: { enabled: true },
+
+  // GitHub Pages configuration
+  ssr: false,
+  app: {
+    baseURL: process.env.NODE_ENV === 'production' ? '/fayna-fair/' : '/',
+    buildAssetsDir: '/_nuxt/',
+  },
+
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@pinia/nuxt',
+    '@nuxt/eslint',
+  ],
+
+  typescript: {
+    strict: true,
+    typeCheck: process.env.NODE_ENV === 'production',
+  },
+
+  eslint: {
+    config: {
+      stylistic: {
+        indent: 2,
+        quotes: 'single',
+        semi: false,
+      },
+    },
+  },
+
+  css: ['~/assets/css/main.css'],
+
+  runtimeConfig: {
+    public: {
+      pocketbaseUrl: process.env.POCKETBASE_URL || 'http://127.0.0.1:8090',
+    },
+  },
+})

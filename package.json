@@ -1,0 +1,32 @@
+{
+  "name": "fayna-fair",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "deploy": "pnpm run generate && gh-pages -d .output/public"
+  },
+  "dependencies": {
+    "@nuxt/ui": "^2.18.2",
+    "nuxt": "^3.13.0",
+    "pinia": "^2.1.7",
+    "pocketbase": "^0.22.0",
+    "vue": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^0.5.0",
+    "@nuxtjs/tailwindcss": "^6.12.0",
+    "@pinia/nuxt": "^0.5.1",
+    "@types/node": "^20.14.0",
+    "gh-pages": "^6.3.0",
+    "typescript": "^5.5.0",
+    "vue-tsc": "^3.1.7"
+  }
+}
