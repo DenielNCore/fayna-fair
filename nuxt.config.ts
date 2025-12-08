@@ -16,6 +16,16 @@ export default defineNuxtConfig({
     },
   },
 
+  routeRules: {
+    '/': { prerender: true },
+  },
+
+  nitro: {
+    prerender: {
+      crawlLinks: false,
+    },
+  },
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',

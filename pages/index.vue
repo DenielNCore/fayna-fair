@@ -18,8 +18,8 @@ interface FormData {
   termsAccepted: boolean
 }
 
-const userName = useLocalStorage('name', '');
-const userPhone = useLocalStorage('phone', '');
+const userName = useLocalStorage('name', '')
+const userPhone = useLocalStorage('phone', '')
 
 const form = reactive<FormData>({
   // name: '',
@@ -212,8 +212,8 @@ const handleSubmit = async () => {
     showSuccess.value = true
 
     // Reset form
-    userName.value = '';
-    userPhone.value = '';
+    userName.value = ''
+    userPhone.value = ''
     form.selectedActivities = []
     form.termsAccepted = false
 
