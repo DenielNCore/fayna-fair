@@ -15,12 +15,6 @@ export default defineNuxtConfig({
     },
   },
 
-  nitro: {
-    prerender: {
-      routes: ['/'],
-    },
-  },
-
   modules: [
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',

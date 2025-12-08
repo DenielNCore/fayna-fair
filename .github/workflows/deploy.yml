@@ -40,6 +40,7 @@ jobs:
         run: pnpm run generate
         env:
           NODE_ENV: production
+          CI: false
 
       - name: Create .nojekyll file
         run: touch .output/public/.nojekyll
