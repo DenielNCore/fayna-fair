@@ -20,6 +20,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
     '@nuxt/eslint',
+    '@vueuse/nuxt',
   ],
 
   typescript: {

@@ -8,3 +8,4 @@ export const usePocketBase = () => {
 
   return pb
 }
+

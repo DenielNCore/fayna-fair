@@ -12,15 +12,18 @@ interface Activity {
 }
 
 interface FormData {
-  name: string
-  phone: string
+  // name: string
+  // phone: string
   selectedActivities: string[]
   termsAccepted: boolean
 }
 
+const userName = useLocalStorage('name', '');
+const userPhone = useLocalStorage('phone', '');
+
 const form = reactive<FormData>({
-  name: '',
-  phone: '',
+  // name: '',
+  // phone: '',
   selectedActivities: [],
   termsAccepted: false,
 })
@@ -160,18 +163,18 @@ const validateForm = (): boolean => {
   errors.name = ''
   errors.phone = ''
 
-  if (!form.name.trim()) {
+  if (!userName.value.trim()) {
     errors.name = 'Ім\'я та прізвище обов\'язкові'
     return false
   }
 
-  if (!form.phone.trim()) {
+  if (!userPhone.value.trim()) {
     errors.phone = 'Номер телефону обов\'язковий'
     return false
   }
 
   const phoneRegex = /^[\d\s+\-()]+$/
-  if (!phoneRegex.test(form.phone)) {
+  if (!phoneRegex.test(userPhone.value)) {
     errors.phone = 'Введіть коректний номер телефону'
     return false
   }
@@ -209,8 +212,8 @@ const handleSubmit = async () => {
     showSuccess.value = true
 
     // Reset form
-    form.name = ''
-    form.phone = ''
+    userName.value = '';
+    userPhone.value = '';
     form.selectedActivities = []
     form.termsAccepted = false
 
@@ -350,7 +353,7 @@ const handleSubmit = async () => {
                 </div>
                 <input
                   id="name"
-                  v-model="form.name"
+                  v-model="userName"
                   type="text"
                   required
                   class="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-3.5 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all bg-white"
@@ -402,7 +405,7 @@ const handleSubmit = async () => {
                 </div>
                 <input
                   id="phone"
-                  v-model="form.phone"
+                  v-model="userPhone"
                   type="tel"
                   required
                   class="w-full pl-10 sm:pl-12 pr-3 sm:pr-4 py-2.5 sm:py-3 md:py-3.5 text-sm sm:text-base border-2 border-gray-200 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all bg-white"
