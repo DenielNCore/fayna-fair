@@ -1,235 +1,233 @@
 <script setup lang="ts">
-    interface Activity {
-        id: string
-        date: string
-        time: string
-        title: string
-        organizer?: string
-        price: string
-        age: string
-        spots: string
-        duration: string
+interface Activity {
+  id: string
+  date: string
+  time: string
+  title: string
+  organizer?: string
+  price: string
+  age: string
+  spots: string
+  duration: string
+}
+
+interface FormData {
+  name: string
+  phone: string
+  selectedActivities: string[]
+  termsAccepted: boolean
+}
+
+const form = reactive<FormData>({
+  name: '',
+  phone: '',
+  selectedActivities: [],
+  termsAccepted: false,
+})
+
+const errors = reactive({
+  name: '',
+  phone: '',
+})
+
+const isSubmitting = ref(false)
+const showSuccess = ref(false)
+
+// Collapsible dates state - all expanded by default
+const expandedDates = reactive<Record<string, boolean>>({})
+
+// Toggle date expansion
+const toggleDate = (date: string) => {
+  expandedDates[date] = !expandedDates[date]
+}
+
+// Activities data
+const activities: Activity[] = [
+  {
+    id: '1',
+    date: '14.12.2025 (неділя)',
+    time: '12:00 - 14:00',
+    title: 'Творча зустріч. Майстер-клас з виготовлення брелока',
+    organizer: 'CoffeeTunes',
+    price: '800 грн',
+    age: '6+',
+    spots: '7',
+    duration: '2 години',
+  },
+  {
+    id: '2',
+    date: '16.12.2025 (вівторок)',
+    time: '18:00 - 20:00',
+    title: 'Гра на соціальну дедукцію "Кров на годинниковій вежі"',
+    organizer: 'Gараж',
+    price: 'донат від 500 грн',
+    age: '18+',
+    spots: '15',
+    duration: '2 години',
+  },
+  {
+    id: '3',
+    date: '16.12.2025 (вівторок)',
+    time: '20:00 - 22:00',
+    title: 'Гра на соціальну дедукцію "Кров на годинниковій вежі"',
+    organizer: 'Gараж',
+    price: 'донат від 500 грн',
+    age: '18+',
+    spots: '15',
+    duration: '2 години',
+  },
+  {
+    id: '4',
+    date: '16.12.2025 (вівторок)',
+    time: '19:00 - 21:00',
+    title: 'Майстер-клас із створення різдвяного віночка',
+    organizer: 'TserTsek',
+    price: '2500 грн',
+    age: '16+',
+    spots: '8',
+    duration: '2 години',
+  },
+  {
+    id: '5',
+    date: '17.12.2025 (середа)',
+    time: '18:00 - 19:00',
+    title: 'Виготовлення маски "Різдвяна коза"',
+    organizer: 'БоХліб',
+    price: '500 грн',
+    age: '8+',
+    spots: '8',
+    duration: '1 година',
+  },
+  {
+    id: '6',
+    date: '17.12.2025 (середа)',
+    time: '19:00 - 22:00',
+    title: 'Майстер-клас "Мініатюрна шафа дивовиж"',
+    organizer: 'Місцеві',
+    price: '800 грн',
+    age: '14+',
+    spots: '8',
+    duration: '3 години',
+  },
+  {
+    id: '7',
+    date: '18.12.2025 (четвер)',
+    time: '17:00 - 20:00',
+    title: 'Художній майстер-клас по створенню новорічної листівки',
+    organizer: 'Cactus',
+    price: '500 грн',
+    age: '8+',
+    spots: '10',
+    duration: '3 години',
+  },
+  {
+    id: '8',
+    date: '21.12.2025 (неділя)',
+    time: '12:00 - 14:00',
+    title: 'Майстер-клас по виготовленню новорічної POP-UP листівки',
+    organizer: 'Місцеві',
+    price: '700 грн',
+    age: '10+',
+    spots: '8',
+    duration: '2 години',
+  },
+]
+
+// Group activities by date
+const activitiesByDate = computed(() => {
+  const grouped: Record<string, Activity[]> = {}
+  activities.forEach((activity) => {
+    if (!grouped[activity.date]) {
+      grouped[activity.date] = []
     }
+    grouped[activity.date].push(activity)
+  })
+  return grouped
+})
 
-    interface FormData {
-        name: string
-        phone: string
-        selectedActivities: string[]
-        termsAccepted: boolean
+// Initialize all dates as expanded when activities are loaded
+watchEffect(() => {
+  const dates = Object.keys(activitiesByDate.value)
+  dates.forEach((date) => {
+    if (!(date in expandedDates)) {
+      expandedDates[date] = true
     }
+  })
+})
 
-    const form = reactive<FormData>({
-        name: '',
-        phone: '',
-        selectedActivities: [],
-        termsAccepted: false,
-    })
+// Validation
+const validateForm = (): boolean => {
+  errors.name = ''
+  errors.phone = ''
 
-    const errors = reactive({
-        name: '',
-        phone: '',
-    })
+  if (!form.name.trim()) {
+    errors.name = 'Ім\'я та прізвище обов\'язкові'
+    return false
+  }
 
-    const isSubmitting = ref(false)
-    const showSuccess = ref(false)
+  if (!form.phone.trim()) {
+    errors.phone = 'Номер телефону обов\'язковий'
+    return false
+  }
 
-    // Collapsible dates state - all expanded by default
-    const expandedDates = reactive<Record<string, boolean>>({})
+  const phoneRegex = /^[\d\s+\-()]+$/
+  if (!phoneRegex.test(form.phone)) {
+    errors.phone = 'Введіть коректний номер телефону'
+    return false
+  }
 
+  return true
+}
 
-    // Toggle date expansion
-    const toggleDate = (date: string) => {
-        expandedDates[date] = !expandedDates[date]
-    }
+// Handle form submission
+const handleSubmit = async () => {
+  if (!validateForm()) {
+    return
+  }
 
-    // Activities data
-    const activities: Activity[] = [
-        {
-        id: '1',
-        date: '14.12.2025 (неділя)',
-        time: '12:00 - 14:00',
-        title: 'Творча зустріч. Майстер-клас з виготовлення брелока',
-        organizer: 'CoffeeTunes',
-        price: '800 грн',
-        age: '6+',
-        spots: '7',
-        duration: '2 години',
-        },
-        {
-        id: '2',
-        date: '16.12.2025 (вівторок)',
-        time: '18:00 - 20:00',
-        title: 'Гра на соціальну дедукцію "Кров на годинниковій вежі"',
-        organizer: 'Gараж',
-        price: 'донат від 500 грн',
-        age: '18+',
-        spots: '15',
-        duration: '2 години',
-        },
-        {
-        id: '3',
-        date: '16.12.2025 (вівторок)',
-        time: '20:00 - 22:00',
-        title: 'Гра на соціальну дедукцію "Кров на годинниковій вежі"',
-        organizer: 'Gараж',
-        price: 'донат від 500 грн',
-        age: '18+',
-        spots: '15',
-        duration: '2 години',
-        },
-        {
-        id: '4',
-        date: '16.12.2025 (вівторок)',
-        time: '19:00 - 21:00',
-        title: 'Майстер-клас із створення різдвяного віночка',
-        organizer: 'TserTsek',
-        price: '2500 грн',
-        age: '16+',
-        spots: '8',
-        duration: '2 години',
-        },
-        {
-        id: '5',
-        date: '17.12.2025 (середа)',
-        time: '18:00 - 19:00',
-        title: 'Виготовлення маски "Різдвяна коза"',
-        organizer: 'БоХліб',
-        price: '500 грн',
-        age: '8+',
-        spots: '8',
-        duration: '1 година',
-        },
-        {
-        id: '6',
-        date: '17.12.2025 (середа)',
-        time: '19:00 - 22:00',
-        title: 'Майстер-клас "Мініатюрна шафа дивовиж"',
-        organizer: 'Місцеві',
-        price: '800 грн',
-        age: '14+',
-        spots: '8',
-        duration: '3 години',
-        },
-        {
-        id: '7',
-        date: '18.12.2025 (четвер)',
-        time: '17:00 - 20:00',
-        title: 'Художній майстер-клас по створенню новорічної листівки',
-        organizer: 'Cactus',
-        price: '500 грн',
-        age: '8+',
-        spots: '10',
-        duration: '3 години',
-        },
-        {
-        id: '8',
-        date: '21.12.2025 (неділя)',
-        time: '12:00 - 14:00',
-        title: 'Майстер-клас по виготовленню новорічної POP-UP листівки',
-        organizer: 'Місцеві',
-        price: '700 грн',
-        age: '10+',
-        spots: '8',
-        duration: '2 години',
-        },
-    ]
+  if (form.selectedActivities.length === 0) {
+    alert('Будь ласка, оберіть хоча б одну активність')
+    return
+  }
 
-    // Group activities by date
-    const activitiesByDate = computed(() => {
-        const grouped: Record<string, Activity[]> = {}
-        activities.forEach((activity) => {
-        if (!grouped[activity.date]) {
-            grouped[activity.date] = []
-        }
-        grouped[activity.date].push(activity)
-        })
-        return grouped
-    })
+  isSubmitting.value = true
 
+  try {
+    // Here you would typically send data to PocketBase or your backend
+    // const pb = usePocketBase()
+    // await pb.collection('registrations').create({
+    //   name: form.name,
+    //   phone: form.phone,
+    //   activities: form.selectedActivities,
+    //   termsAccepted: form.termsAccepted,
+    // })
 
-    // Initialize all dates as expanded when activities are loaded
-    watchEffect(() => {
-        const dates = Object.keys(activitiesByDate.value)
-        dates.forEach((date) => {
-        if (!(date in expandedDates)) {
-            expandedDates[date] = true
-        }
-        })
-    })
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
-    // Validation
-    const validateForm = (): boolean => {
-        errors.name = ''
-        errors.phone = ''
+    // Show success message
+    showSuccess.value = true
 
-        if (!form.name.trim()) {
-        errors.name = 'Ім\'я та прізвище обов\'язкові'
-        return false
-        }
+    // Reset form
+    form.name = ''
+    form.phone = ''
+    form.selectedActivities = []
+    form.termsAccepted = false
 
-        if (!form.phone.trim()) {
-        errors.phone = 'Номер телефону обов\'язковий'
-        return false
-        }
-
-        const phoneRegex = /^[\d\s+\-()]+$/
-        if (!phoneRegex.test(form.phone)) {
-        errors.phone = 'Введіть коректний номер телефону'
-        return false
-        }
-
-        return true
-    }
-
-    // Handle form submission
-    const handleSubmit = async () => {
-        if (!validateForm()) {
-        return
-        }
-
-        if (form.selectedActivities.length === 0) {
-        alert('Будь ласка, оберіть хоча б одну активність')
-        return
-        }
-
-        isSubmitting.value = true
-
-        try {
-        // Here you would typically send data to PocketBase or your backend
-        // const pb = usePocketBase()
-        // await pb.collection('registrations').create({
-        //   name: form.name,
-        //   phone: form.phone,
-        //   activities: form.selectedActivities,
-        //   termsAccepted: form.termsAccepted,
-        // })
-
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1000))
-
-        // Show success message
-        showSuccess.value = true
-
-        // Reset form
-        form.name = ''
-        form.phone = ''
-        form.selectedActivities = []
-        form.termsAccepted = false
-
-        // Scroll to success message
-        setTimeout(() => {
-            const successElement = document.querySelector('.bg-gradient-to-br.from-green-50')
-            successElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }, 100)
-        }
-        catch (error) {
-        console.error('Error submitting form:', error)
-        alert('Помилка при відправці форми. Спробуйте ще раз.')
-        }
-        finally {
-        isSubmitting.value = false
-        }
-    }
+    // Scroll to success message
+    setTimeout(() => {
+      const successElement = document.querySelector('.bg-gradient-to-br.from-green-50')
+      successElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
+  catch (error) {
+    console.error('Error submitting form:', error)
+    alert('Помилка при відправці форми. Спробуйте ще раз.')
+  }
+  finally {
+    isSubmitting.value = false
+  }
+}
 </script>
 
 <template>
@@ -690,5 +688,3 @@
     </div>
   </div>
 </template>
-
-
