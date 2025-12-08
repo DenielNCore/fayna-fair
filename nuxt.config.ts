@@ -6,7 +6,8 @@ export default defineNuxtConfig({
   // GitHub Pages configuration
   ssr: false,
   app: {
-    baseURL: process.env.NODE_ENV === 'production' ? '/fayna-fair/' : '/',
+    // Use root path for custom domain, or /fayna-fair/ for GitHub Pages subdirectory
+    baseURL: process.env.NUXT_APP_BASE_URL || '/',
     buildAssetsDir: '/_nuxt/',
     head: {
       meta: [
