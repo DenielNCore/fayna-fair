@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   app: {
     // Use root path for custom domain, or /fayna-fair/ for GitHub Pages subdirectory
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
-    buildAssetsDir: '/_nuxt/',
+    buildAssetsDir: '/assets/',
     head: {
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5' },

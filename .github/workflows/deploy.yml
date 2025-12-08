@@ -45,7 +45,7 @@ jobs:
 
       - name: Ensure required files exist
         run: |
-          # Create .nojekyll to allow _nuxt directory (critical for GitHub Pages)
+          # Create .nojekyll (allows directories/files starting with _)
           touch .output/public/.nojekyll
           # Create CNAME for custom domain
           echo "fayna-fair.pp.ua" > .output/public/CNAME
@@ -54,8 +54,8 @@ jobs:
             cp public/favicon.ico .output/public/favicon.ico
           fi
           # Verify critical files exist - fail build if missing
-          if [ ! -d ".output/public/_nuxt" ]; then
-            echo "ERROR: _nuxt directory not found! Build failed."
+          if [ ! -d ".output/public/assets" ]; then
+            echo "ERROR: assets directory not found! Build failed."
             exit 1
           fi
           if [ ! -f ".output/public/index.html" ]; then
@@ -72,20 +72,41 @@ jobs:
         run: |
           echo "=== Build Output Verification ==="
           echo "Files in root:"
-          ls -la .output/public/ | grep -E "(index|CNAME|nojekyll|_nuxt)"
+          ls -la .output/public/ | grep -E "(index|CNAME|nojekyll|assets)"
           echo ""
-          echo "_nuxt directory contents:"
-          ls -la .output/public/_nuxt/ | head -15
+          echo "assets directory contents:"
+          ls -la .output/public/assets/ | head -15
           echo ""
           echo "File counts:"
-          echo "JS files: $(find .output/public/_nuxt -name '*.js' | wc -l)"
-          echo "CSS files: $(find .output/public/_nuxt -name '*.css' | wc -l)"
+          echo "JS files: $(find .output/public/assets -name '*.js' | wc -l)"
+          echo "CSS files: $(find .output/public/assets -name '*.css' | wc -l)"
           echo ""
           echo "Checking index.html paths:"
           grep -o 'href="[^"]*"\|src="[^"]*"' .output/public/index.html | head -5
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      - name: Verify artifact contents before upload
+        run: |
+          echo "=== Final Artifact Verification ==="
+          echo "Total files in artifact:"
+          find .output/public -type f | wc -l
+          echo ""
+          echo "Critical files check:"
+          test -f .output/public/.nojekyll && echo "✓ .nojekyll" || echo "✗ .nojekyll MISSING"
+          test -f .output/public/CNAME && echo "✓ CNAME" || echo "✗ CNAME MISSING"
+          test -f .output/public/index.html && echo "✓ index.html" || echo "✗ index.html MISSING"
+          test -d .output/public/assets && echo "✓ assets directory" || echo "✗ assets directory MISSING"
+          echo ""
+          echo "Asset files in assets:"
+          find .output/public/assets -type f -name "*.js" -o -name "*.css" | head -10
+          echo ""
+          echo "File sizes:"
+          du -sh .output/public/assets/
+          echo ""
+          echo "Directory structure:"
+          tree .output/public -L 2 -I 'node_modules' || find .output/public -maxdepth 2 -type d
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
