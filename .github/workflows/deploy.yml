@@ -43,8 +43,46 @@ jobs:
           CI: false
           NUXT_APP_BASE_URL: /
 
-      - name: Create .nojekyll file
-        run: touch .output/public/.nojekyll
+      - name: Ensure required files exist
+        run: |
+          # Create .nojekyll to allow _nuxt directory (critical for GitHub Pages)
+          touch .output/public/.nojekyll
+          # Create CNAME for custom domain
+          echo "fayna-fair.pp.ua" > .output/public/CNAME
+          # Copy favicon if it exists in public directory
+          if [ -f "public/favicon.ico" ]; then
+            cp public/favicon.ico .output/public/favicon.ico
+          fi
+          # Verify critical files exist - fail build if missing
+          if [ ! -d ".output/public/_nuxt" ]; then
+            echo "ERROR: _nuxt directory not found! Build failed."
+            exit 1
+          fi
+          if [ ! -f ".output/public/index.html" ]; then
+            echo "ERROR: index.html not found! Build failed."
+            exit 1
+          fi
+          if [ ! -f ".output/public/.nojekyll" ]; then
+            echo "ERROR: .nojekyll file not created! Build failed."
+            exit 1
+          fi
+          echo "✓ All required files exist"
+
+      - name: Verify build output
+        run: |
+          echo "=== Build Output Verification ==="
+          echo "Files in root:"
+          ls -la .output/public/ | grep -E "(index|CNAME|nojekyll|_nuxt)"
+          echo ""
+          echo "_nuxt directory contents:"
+          ls -la .output/public/_nuxt/ | head -15
+          echo ""
+          echo "File counts:"
+          echo "JS files: $(find .output/public/_nuxt -name '*.js' | wc -l)"
+          echo "CSS files: $(find .output/public/_nuxt -name '*.css' | wc -l)"
+          echo ""
+          echo "Checking index.html paths:"
+          grep -o 'href="[^"]*"\|src="[^"]*"' .output/public/index.html | head -5
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
