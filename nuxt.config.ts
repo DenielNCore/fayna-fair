@@ -29,7 +29,7 @@ export default defineNuxtConfig({
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@200..700&display=swap',
         },
       ],
     },
