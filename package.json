@@ -2,33 +2,29 @@
   "name": "fayna-fair",
   "private": true,
   "type": "module",
+  "version": "0.0.0",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "deploy": "pnpm run generate && gh-pages -d .output/public"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.18.2",
-    "@vueuse/core": "^14.1.0",
-    "@vueuse/nuxt": "^14.1.0",
-    "nuxt": "^3.13.0",
-    "pinia": "^2.1.7",
-    "pocketbase": "^0.22.0",
-    "vue": "latest",
-    "vue-router": "latest"
+    "@nuxt/image": "2.0.0",
+    "@nuxtjs/i18n": "10.3.0",
+    "@pinia/nuxt": "^0.11.3",
+    "@vueuse/nuxt": "^14.2.1",
+    "nuxt": "^4.4.2",
+    "pocketbase": "^0.26.8",
+    "vue": "^3.5.33",
+    "vue-router": "^5.0.6"
   },
   "devDependencies": {
-    "@nuxt/eslint": "^0.5.0",
-    "@nuxtjs/tailwindcss": "^6.12.0",
-    "@pinia/nuxt": "^0.5.1",
-    "@types/node": "^20.14.0",
-    "gh-pages": "^6.3.0",
-    "typescript": "^5.5.0",
-    "vue-tsc": "^3.1.7"
-  }
+    "@nuxt/eslint": "1.15.2",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "eslint": "^10.2.1",
+    "typescript": "^6.0.3"
+  },
+  "packageManager": "pnpm@11.0.9+sha512.34ce82e6780233cf9cad8685029a8f81d2e06196c5a9bad98879f7424940c6817c4e4524fb7d38b8553ceed48b9758b8ebaf1abd3600c232c4c8cf7366086f38"
 }

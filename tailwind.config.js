@@ -1,15 +1,21 @@
-/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    './components/**/*.{js,vue,ts}',
-    './layouts/**/*.vue',
-    './pages/**/*.vue',
-    './plugins/**/*.{js,ts}',
-    './app.vue',
-    './error.vue',
+    './app/**/*.{vue,js,ts}',
+    './app.{vue,js,ts}',
+    './error.{vue,js,ts}',
   ],
+  darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      // colors: {
+      //   blue: {
+      //     900: '#181242',
+      //   },
+      // },
+      // fontFamily: {
+      //   sans: ['Oswald', 'sans-serif'],
+      // },
+    },
   },
   plugins: [],
-}
+};

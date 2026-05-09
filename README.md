@@ -1,115 +1,75 @@
-# Файний Ярмарок - Fayna Fair
+# Nuxt Minimal Starter
 
-A modern charity event registration form built with Nuxt 3, TypeScript, Tailwind CSS, Pinia, and PocketBase.
-
-🌐 **Live Site**: [View on GitHub Pages](https://denielncore.github.io/fayna-fair/)
+Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
 ## Setup
 
-Install dependencies:
+Make sure to install dependencies:
 
 ```bash
+# npm
+npm install
+
+# pnpm
 pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-## Development
+## Development Server
 
-Start the development server:
+Start the development server on `http://localhost:3000`:
 
 ```bash
+# npm
+npm run dev
+
+# pnpm
 pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
 ```
 
-## Build
+## Production
 
-Build the application:
+Build the application for production:
 
 ```bash
+# npm
+npm run build
+
+# pnpm
 pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
 ```
 
-## Linting
-
-Run ESLint:
+Locally preview production build:
 
 ```bash
-pnpm lint
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
 ```
 
-Fix linting issues:
-
-```bash
-pnpm lint:fix
-```
-
-## Tech Stack
-
-- **Nuxt 3** - Vue.js framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Utility-first CSS framework
-- **Pinia** - State management
-- **PocketBase** - Backend as a service
-- **ESLint** - Code linting
-- **pnpm** - Package manager
-
-## Deployment to GitHub Pages
-
-The project supports two deployment methods:
-
-### Method 1: GitHub Actions (Recommended - Automatic)
-
-The project is configured for automatic deployment to GitHub Pages using GitHub Actions.
-
-#### Setup Instructions
-
-1. **Enable GitHub Pages in your repository**:
-   - Go to your repository settings
-   - Navigate to "Pages" in the left sidebar
-   - Under "Source", select "GitHub Actions"
-
-2. **Push your code**:
-   ```bash
-   git add .
-   git commit -m "Configure GitHub Pages deployment"
-   git push origin main
-   ```
-
-3. **The workflow will automatically**:
-   - Build the static site when you push to `main`
-   - Deploy it to GitHub Pages
-   - Your site will be available at: `https://denielncore.github.io/fayna-fair/`
-
-### Method 2: Manual Deployment Script
-
-You can also deploy manually using the npm script:
-
-```bash
-pnpm run deploy
-```
-
-This will:
-1. Generate the static site (`pnpm run generate`)
-2. Deploy it to the `gh-pages` branch using `gh-pages`
-
-**Note**: Make sure you have:
-- Git initialized and remote configured
-- Write access to the repository
-
-### Manual Build
-
-To build the static site locally without deploying:
-
-```bash
-pnpm run generate
-```
-
-The output will be in `.output/public/` directory.
-
-## Environment Variables
-
-Create a `.env` file in the root directory:
-
-```
-POCKETBASE_URL=http://127.0.0.1:8090
-```
-
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

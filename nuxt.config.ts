@@ -1,61 +1,68 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
-  devtools: { enabled: true },
-
-  // GitHub Pages configuration
-  ssr: false,
-  app: {
-    // Use root path for custom domain, or /fayna-fair/ for GitHub Pages subdirectory
-    baseURL: process.env.NUXT_APP_BASE_URL || '/',
-    buildAssetsDir: '/assets/',
-    head: {
-      meta: [
-        { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=5' },
-      ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      ],
-    },
-  },
-
-  routeRules: {
-    '/': { prerender: true },
-  },
-
-  nitro: {
-    prerender: {
-      crawlLinks: false,
-    },
-  },
-
   modules: [
-    '@nuxtjs/tailwindcss',
-    '@pinia/nuxt',
     '@nuxt/eslint',
     '@vueuse/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n',
+    '@nuxt/image',
+    '@pinia/nuxt',
   ],
+  ssr: false,
+  devtools: { enabled: true },
 
-  typescript: {
-    strict: true,
-    typeCheck: process.env.NODE_ENV === 'production',
+  app: {
+    head: {
+      title: 'Garage',
+      meta: [
+        { name: 'description', content: 'Благодійний ярмарок на території ЖК Файна Таун' },
+      ],
+      link: [
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.googleapis.com',
+        },
+        {
+          rel: 'preconnect',
+          href: 'https://fonts.gstatic.com',
+          crossorigin: 'anonymous',
+        },
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap',
+        },
+      ],
+    },
+
   },
 
+  runtimeConfig: {
+    // Make environment variables accessible here
+    public: {
+      ASSETS_URL: process.env.ASSETS_URL,
+      DB_URL: process.env.DB_URL,
+      BASE_URL: process.env.BASE_URL,
+    },
+  },
+  compatibilityDate: '2025-07-15',
+
   eslint: {
+    // options here
     config: {
       stylistic: {
         indent: 2,
         quotes: 'single',
-        semi: false,
+        semi: true,
+        jsx: true,
       },
     },
   },
 
-  css: ['~/assets/css/main.css'],
-
-  runtimeConfig: {
-    public: {
-      pocketbaseUrl: process.env.POCKETBASE_URL || 'http://127.0.0.1:8090',
-    },
+  i18n: {
+    locales: [
+      { code: 'uk', language: 'uk-UA', file: 'uk.ts' },
+      { code: 'en', language: 'en-US', file: 'en.ts' },
+    ],
+    defaultLocale: 'uk',
   },
-})
+});
