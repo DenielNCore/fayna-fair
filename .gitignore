@@ -23,7 +23,7 @@ logs
 
 # Local env files
 .env
-.env.*
+.env2.production
 !.env.example
 
 # PocketBase
