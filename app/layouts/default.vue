@@ -6,7 +6,7 @@
   <div>
     <HeaderComponent />
 
-    <main>
+    <main class="pt-[120px] max-md:pt-[96px]">
       <NuxtPage />
     </main>
 

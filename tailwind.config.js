@@ -7,11 +7,14 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      height: {
+        19: '66px',
+      },
       colors: {
         gray: {
           50: '#FFFFFF',
           100: '#F4F4F4',
-          950: '#252323',
+          900: '#252323',
         },
         red: {
           500: '#FF5061',

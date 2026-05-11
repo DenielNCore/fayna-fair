@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxtjs/i18n',
     '@nuxt/image',
     '@pinia/nuxt',
+    'nuxt-svgo',
   ],
   ssr: false,
   devtools: { enabled: true },
@@ -29,7 +30,7 @@ export default defineNuxtConfig({
         },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@200..700&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@400;700&display=swap',
         },
       ],
     },
@@ -45,7 +46,6 @@ export default defineNuxtConfig({
     },
   },
   compatibilityDate: '2025-07-15',
-
   eslint: {
     // options here
     config: {
@@ -64,5 +64,24 @@ export default defineNuxtConfig({
       { code: 'en', language: 'en-US', file: 'en.ts' },
     ],
     defaultLocale: 'uk',
+  },
+
+  svgo: {
+    svgo: true,
+    defaultImport: 'skipsvgo',
+    autoImportPath: './assets/icons/',
+    global: true,
+    svgoConfig: {
+      plugins: [
+        {
+          name: 'preset-default',
+          params: {
+            overrides: {
+              removeViewBox: false,
+            },
+          },
+        },
+      ],
+    },
   },
 });

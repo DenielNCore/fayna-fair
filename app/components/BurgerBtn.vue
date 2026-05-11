@@ -27,7 +27,7 @@ const isOpen = defineModel<boolean>('isOpen', { default: false });
   margin-left: max(16px, env(safe-area-inset-left));
 }
 .menu-btn__burger {
-  width: 24px;
+  width: 30px;
   height: 1.5px;
   background: black;
   border-radius: 5px;
@@ -38,7 +38,7 @@ const isOpen = defineModel<boolean>('isOpen', { default: false });
 .menu-btn__burger::after {
   content: '';
   position: absolute;
-  width: 24px;
+  width: 30px;
   height: 1.5px;
   background: black;
   border-radius: 5px;

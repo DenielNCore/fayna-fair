@@ -31,10 +31,24 @@ watch(width, (newWidth) => {
 </script>
 
 <template>
-  <div ref="containerRef">
+  <div
+    ref="containerRef"
+    class="px-12 max-md:px-4"
+  >
     <NuxtLoadingIndicator />
     <NuxtLayout name="default" />
     <NuxtRouteAnnouncer />
     <!--    <NuxtWelcome /> -->
   </div>
 </template>
+
+<style>
+body {
+  background: #F4F4F4;
+}
+
+svg {
+  width: 18px;
+  height: 18px;
+}
+</style>
