@@ -3,13 +3,14 @@ const containerRef = ref<HTMLElement | null>(null);
 const { width } = useElementSize(containerRef);
 const padding = useBigLayoutPadding();
 const { setupScrollSaving, restoreScrollPosition } = useScrollRestoration();
+const { t } = useI18n();
 
-useHead({
-  title: 'ФАЙНИЙ ЯРМАРОК',
+useHead(() => ({
+  title: t('app.title'),
   htmlAttrs: {
     lang: 'uk',
   },
-});
+}));
 
 onMounted(() => {
   // Встановити зберігання скролу при закритті сторінки
@@ -33,7 +34,7 @@ watch(width, (newWidth) => {
 <template>
   <div
     ref="containerRef"
-    class="px-12 max-md:px-4 text-gray-900"
+    class="text-gray-900"
   >
     <NuxtLoadingIndicator />
     <NuxtLayout name="default" />

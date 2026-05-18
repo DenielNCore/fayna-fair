@@ -1,33 +1,60 @@
 <script setup lang="ts">
 import IconArrow from 'assets/arrow.svg';
 
-const initiatives = [
-  { title: '1 500 000+ грн', text: 'зібрано на останніх ярмарках' },
-  { title: '100+', text: 'об’єднуються для організації кожної події' },
-  { title: 'Сотні учасників', text: 'роблять внесок у нашу спільну безпеку' },
-];
+const { t } = useI18n();
 
-const ourValues = [
-  { img: '/goal-1.png', title: 'Відповідальність', text: 'Ми усвідомлюємо важливість підтримки війська і беремо на себе відповідальність діяти.' },
-  { img: '/goal-2.png', title: 'Прозорість', text: 'Довіра будується на цифрах. Кожна гривня з ярмарку має свій шлях: від донату до звіту про закупленю. Відкрито. Публічно. Чесно.' },
-  { img: '/goal-3.png', title: 'Довіра', text: 'Файний ярмарок тримається на довірі між людьми, які організовують подію, беруть у ній участь і підтримують її.' },
-  { img: '/goal-4.png', title: 'Спільнота', text: 'Файний ярмарок виріс із сусідської ініціативи і залишається простором, де люди підтримують одне одного і разом роблять важливу справу.' },
-];
+const initiatives = computed(() => [
+  {
+    title: t('home.initiatives.first.title'),
+    text: t('home.initiatives.first.text'),
+  },
+  {
+    title: t('home.initiatives.second.title'),
+    text: t('home.initiatives.second.text'),
+  },
+  {
+    title: t('home.initiatives.third.title'),
+    text: t('home.initiatives.third.text'),
+  },
+]);
+
+const ourValues = computed(() => [
+  {
+    img: '/goal-1.png',
+    title: t('home.values.first.title'),
+    text: t('home.values.first.text'),
+  },
+  {
+    img: '/goal-2.png',
+    title: t('home.values.second.title'),
+    text: t('home.values.second.text'),
+  },
+  {
+    img: '/goal-3.png',
+    title: t('home.values.third.title'),
+    text: t('home.values.third.text'),
+  },
+  {
+    img: '/goal-4.png',
+    title: t('home.values.fourth.title'),
+    text: t('home.values.fourth.text'),
+  },
+]);
 </script>
 
 <template>
   <div>
     <!--  ГОЛОВНИЙ БЛОК  -->
-    <div class="bg-green-100 flex items-center rounded-[32px] p-12">
-      <div class=" w-1/2 flex flex-col gap-9">
+    <div class="mx-12 bg-green-100 flex items-center rounded-[32px] p-12">
+      <div class="w-1/2 flex flex-col gap-9">
         <div class="text-green-700 text-subtitle2 font-medium">
-          Благодійний Файний ярмарок
+          {{ t('home.hero.subtitle') }}
         </div>
         <div class="text-h1 font-semibold ">
-          Безперервна допомога війську
+          {{ t('home.hero.title') }}
         </div>
         <div class="text-p2">
-          Спільнота мешканців «Файна Таун» об’єдналися, щоб підтримувати українських захисників.
+          {{ t('home.hero.description') }}
         </div>
         <div class="">
           <div class="w-full h-full  flex items-center gap-16 ">
@@ -38,8 +65,8 @@ const ourValues = [
               height="105"
             />
             <div class="font-[caveat] text-p1 text-green-700 font-bold whitespace-nowrap relative">
-              Відскануй, щоб задонатити
-              <IconArrow class="absolute -left-[80px] -bottom-5 w-36 h-8" />
+              {{ t('home.hero.scanDonate') }}
+              <IconArrow class="absolute -left-[80px] -bottom-5 w-36 h-8 stroke-green-700" />
             </div>
           </div>
         </div>
@@ -54,10 +81,10 @@ const ourValues = [
     <BlockWrapper>
       <div class="flex flex-col gap-8 max-md:justify-center">
         <div class="text-h2 font-semibold text-center">
-          Про ініціативу
+          {{ t('home.about.title') }}
         </div>
         <div class="text-p1 max-md:text-justify text-center w-[760px]">
-          Віримо, що сила громади — у спільній дії. Формат простий: сусіди діляться талантами, часом і творчістю, а гості ярмарку відвідують локації за донат.
+          {{ t('home.about.description') }}
         </div>
       </div>
 
@@ -77,14 +104,14 @@ const ourValues = [
       </div>
 
       <!--  ГАЛЕРЕЯ  -->
-      <div>GALLERY</div>
+      <div>{{ t('home.gallery.title') }}</div>
     </BlockWrapper>
 
     <!--  НАШІ ЦІННОСТІ 1 -->
 
     <BlockWrapper>
       <template #title>
-        Наші цінності
+        {{ t('home.values.title') }}
       </template>
       <div class="flex max-xl:flex-col gap-8">
         <div
@@ -108,8 +135,10 @@ const ourValues = [
     </BlockWrapper>
 
     <!--  НАШІ ЦІННОСТІ 2 -->
+    <BlockOurValues2 />
 
-    <OurValues2 />
+    <!--  ПРОГРАМА ЯРМАРКУ -->
+    <BlockProgram />
   </div>
 </template>
 

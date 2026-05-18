@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import IconLogo from 'assets/logo-footer.svg';
+
+const { t } = useI18n();
 </script>
 
 <template>
@@ -7,7 +9,7 @@ import IconLogo from 'assets/logo-footer.svg';
     <IconLogo class="w-[149px] h-12" />
 
     <div class="text-small font-light">
-      © 2026 Файний ярмарок. Зроблено сусідами для перемоги.
+      {{ t('footer.copyright') }}
     </div>
 
     <InstagramBtn />
@@ -16,7 +18,7 @@ import IconLogo from 'assets/logo-footer.svg';
       class="fixed bottom-6 md:hidden"
       type="3"
     >
-      Задонатити
+      {{ t('footer.donate') }}
     </ButtonLevel>
   </footer>
 </template>

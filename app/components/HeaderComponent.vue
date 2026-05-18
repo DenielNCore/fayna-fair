@@ -3,33 +3,36 @@ import IconLogo from 'assets/logo-full.svg';
 import IconLogoMob from 'assets/logo-mob.svg';
 import InstagramBtn from '~/components/InstagramBtn.vue';
 
-const links = [
-  { name: 'Хто ми',
+const { t } = useI18n();
+
+const links = computed(() => [
+  {
+    name: t('header.links.about'),
     href: '/about',
   },
   {
-    name: 'Програма',
+    name: t('header.links.program'),
     href: '/program',
   },
   {
-    name: 'Допомога армія',
+    name: t('header.links.help'),
     href: '/help',
   },
   {
-    name: 'Галерея',
+    name: t('header.links.gallery'),
     href: '/gallery',
   },
   {
-    name: 'Партнерам',
+    name: t('header.links.partners'),
     href: '/partners',
   },
-];
+]);
 
 const isOpen = ref(false);
 </script>
 
 <template>
-  <header class="w-full px-12 pt-6 max-md:px-2 max-md:pt-2 fixed left-0 z-10">
+  <header class="w-full px-12 pt-6 max-md:px-2 max-md:pt-2 fixed left-0 z-20">
     <div
       :class="{
         'max-md:h-[calc(100dvh_-_16px)]': isOpen,
@@ -64,7 +67,7 @@ const isOpen = ref(false);
             class="w-[216px]"
             type="2"
           >
-            Підтримати
+            {{ t('header.support') }}
           </ButtonLevel>
         </div>
 
@@ -91,7 +94,7 @@ const isOpen = ref(false);
             class="w-[216px]"
             type="2"
           >
-            Підтримати
+            {{ t('header.support') }}
           </ButtonLevel>
         </div>
       </template>
