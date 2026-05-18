@@ -38,6 +38,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Montserrat Alternates', 'sans-serif'],
+        caveat: ['Caveat', 'cursive'],
       },
     },
   },

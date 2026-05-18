@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import FooterComponent from '~/components/FooterComponent.vue';
 </script>
 
 <template>
@@ -10,9 +10,7 @@
       <NuxtPage />
     </main>
 
-    <footer>
-      footer
-    </footer>
+    <FooterComponent />
   </div>
 </template>
 

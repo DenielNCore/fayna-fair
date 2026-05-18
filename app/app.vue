@@ -33,7 +33,7 @@ watch(width, (newWidth) => {
 <template>
   <div
     ref="containerRef"
-    class="px-12 max-md:px-4"
+    class="px-12 max-md:px-4 text-gray-900"
   >
     <NuxtLoadingIndicator />
     <NuxtLayout name="default" />

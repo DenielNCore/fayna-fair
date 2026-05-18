@@ -1,21 +1,7 @@
 <script setup lang="ts">
 import IconLogo from 'assets/logo-full.svg';
-import IconInstagram from 'assets/icons/insta.svg';
-
-// const { isScrolled } = useHeaderScroll(50);
-
-// const menuIsOpen = ref(false);
-
-// const handleAnchorClick = (e: MouseEvent, href: string) => {
-//   if (href.startsWith('#')) {
-//     e.preventDefault();
-//     const target = document.querySelector(href);
-//     if (target) {
-//       target.scrollIntoView({ behavior: 'smooth' });
-//       menuIsOpen.value = false;
-//     }
-//   }
-// };
+import IconLogoMob from 'assets/logo-mob.svg';
+import InstagramBtn from '~/components/InstagramBtn.vue';
 
 const links = [
   { name: 'Хто ми',
@@ -39,23 +25,25 @@ const links = [
   },
 ];
 
-const isOpen = ref(true);
+const isOpen = ref(false);
 </script>
 
 <template>
-  <div class="w-full px-12 pt-6 max-md:px-2 max-md:pt-2 fixed left-0">
+  <header class="w-full px-12 pt-6 max-md:px-2 max-md:pt-2 fixed left-0 z-10">
     <div
       :class="{
         'max-md:h-[calc(100dvh_-_16px)]': isOpen,
-        '': !isOpen,
-
+        'max-md:h-[66px]': !isOpen,
       }"
-      class="bg-gray-50 max-md:flex max-md:flex-col max-md:justify-between px-3 py-2 rounded-xl drop-shadow-md "
+      class="bg-gray-50 max-md:flex max-md:flex-col max-md:justify-between px-3 py-2 rounded-xl drop-shadow-md transition-all duration-300"
     >
       <div class="h-[50px] flex gap-6 justify-between items-center">
         <a href="/">
           <IconLogo
-            class="h-[54px] min-w-[242px] cursor-pointer"
+            class="h-[54px] min-w-[242px] cursor-pointer max-md:hidden"
+          />
+          <IconLogoMob
+            class="h-[54px] min-w-[242px] cursor-pointer md:hidden"
           />
         </a>
 
@@ -63,7 +51,7 @@ const isOpen = ref(true);
           <ButtonLevel
             v-for="link in links"
             :key="link.name"
-            class="text-button font-semibold text-gray-900 hover:text-gray-900/70"
+            class="text-button font-semibold hover:text-gray-900/70"
             :href="link.href"
           >
             {{ link.name }}
@@ -71,9 +59,7 @@ const isOpen = ref(true);
         </div>
 
         <div class="flex gap-4 items-center max-md:hidden">
-          <ButtonLevel class="bg-green-100 w-[44px] h-[44px] rounded-full hover:bg-green-100/80">
-            <IconInstagram class="text-gray-900 " />
-          </ButtonLevel>
+          <InstagramBtn />
           <ButtonLevel
             class="w-[216px]"
             type="2"
@@ -88,21 +74,19 @@ const isOpen = ref(true);
       </div>
 
       <template v-if="isOpen">
-        <div class="flex flex-col gap-6">
+        <div class="flex flex-col gap-6 md:hidden">
           <ButtonLevel
             v-for="link in links"
             :key="link.name"
-            class="text-button font-semibold text-gray-900 hover:text-gray-900/70"
+            class="text-button font-semibold hover:text-gray-900/70"
             :href="link.href"
           >
             {{ link.name }}
           </ButtonLevel>
         </div>
 
-        <div class="flex flex-col gap-4 items-center">
-          <ButtonLevel class="bg-green-100 w-[44px] h-[44px] rounded-full hover:bg-green-100/80">
-            <IconInstagram class="text-gray-900 " />
-          </ButtonLevel>
+        <div class="flex flex-col gap-4 items-center md:hidden">
+          <InstagramBtn />
           <ButtonLevel
             class="w-[216px]"
             type="2"
@@ -112,7 +96,7 @@ const isOpen = ref(true);
         </div>
       </template>
     </div>
-  </div>
+  </header>
 </template>
 
 <style scoped>
