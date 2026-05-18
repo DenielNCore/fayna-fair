@@ -62,7 +62,7 @@ const isOpen = ref(false);
         </div>
 
         <div class="flex gap-4 items-center max-md:hidden">
-          <InstagramBtn />
+          <InstagramBtn href="https://www.instagram.com/" />
           <ButtonLevel
             class="w-[216px]"
             type="2"
@@ -89,7 +89,7 @@ const isOpen = ref(false);
         </div>
 
         <div class="flex flex-col gap-4 items-center md:hidden">
-          <InstagramBtn />
+          <InstagramBtn href="https://www.instagram.com/" />
           <ButtonLevel
             class="w-[216px]"
             type="2"

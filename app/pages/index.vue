@@ -139,6 +139,12 @@ const ourValues = computed(() => [
 
     <!--  ПРОГРАМА ЯРМАРКУ -->
     <BlockProgram />
+
+    <!--  КОМАНДА -->
+    <BlockTeam />
+
+    <!--  ПАРТНЕРИ -->
+    <BlockPartners />
   </div>
 </template>
 
