@@ -8,15 +8,37 @@ import CarouselWrapper from '~/components/CarouselWrapper.vue';
 </script>
 
 <template>
-  <BlockWrapper class="">
+  <BlockWrapper class="px-0 max-md:px-0">
     <template #title>
       {{ $t('team.title') }}
     </template>
 
     <CarouselWrapper>
-      <div>111</div>
-      <div>222</div>
-      <div>333</div>
+      <NuxtImg
+        width="243"
+        height="108"
+        src="partner.png"
+      />
+      <NuxtImg
+        width="243"
+        height="108"
+        src="partner.png"
+      />
+      <NuxtImg
+        width="243"
+        height="108"
+        src="partner.png"
+      />
+      <NuxtImg
+        width="243"
+        height="108"
+        src="partner.png"
+      />
+      <NuxtImg
+        width="243"
+        height="108"
+        src="partner.png"
+      />
     </CarouselWrapper>
 
     <ButtonLevel

@@ -83,7 +83,7 @@ const ourValues = computed(() => [
         <div class="text-h2 font-semibold text-center">
           {{ t('home.about.title') }}
         </div>
-        <div class="text-p1 max-md:text-justify text-center w-[760px]">
+        <div class="text-p1 max-md:text-justify text-center w-[760px] max-xl:w-full">
           {{ t('home.about.description') }}
         </div>
       </div>
