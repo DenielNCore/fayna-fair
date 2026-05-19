@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import IconArrow from 'assets/arrow.svg';
-
 const { t } = useI18n();
 
 const initiatives = computed(() => [
@@ -45,38 +43,7 @@ const ourValues = computed(() => [
 <template>
   <div>
     <!--  ГОЛОВНИЙ БЛОК  -->
-    <div class="mx-12 bg-green-100 flex items-center rounded-[32px] p-12">
-      <div class="w-1/2 flex flex-col gap-9">
-        <div class="text-green-700 text-subtitle2 font-medium">
-          {{ t('home.hero.subtitle') }}
-        </div>
-        <div class="text-h1 font-semibold ">
-          {{ t('home.hero.title') }}
-        </div>
-        <div class="text-p2">
-          {{ t('home.hero.description') }}
-        </div>
-        <div class="">
-          <div class="w-full h-full  flex items-center gap-16 ">
-            <NuxtImg
-              class="rounded-lg min-w-[105px] min-h-[105px]"
-              src="/donate-qr.png"
-              width="105"
-              height="105"
-            />
-            <div class="font-[caveat] text-p1 text-green-700 font-bold whitespace-nowrap relative">
-              {{ t('home.hero.scanDonate') }}
-              <IconArrow class="absolute -left-[80px] -bottom-5 w-36 h-8 stroke-green-700" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <NuxtImg
-        class="w-1/2"
-        src="/main.png"
-      />
-    </div>
-
+    <BlockMain />
     <!--  ПРО ІНІЦІАТИВУ  -->
     <BlockWrapper>
       <div class="flex flex-col gap-8 max-md:justify-center">
@@ -104,7 +71,44 @@ const ourValues = computed(() => [
       </div>
 
       <!--  ГАЛЕРЕЯ  -->
-      <div>{{ t('home.gallery.title') }}</div>
+      <CarouselWrapper class="h-[220px]">
+        <NuxtImg
+          width="244"
+          height="156"
+          class="rounded-3xl"
+          src="gallery/gallery-1.png"
+        />
+        <NuxtImg
+          width="244"
+          height="156"
+          class="rounded-3xl"
+          src="gallery/gallery-2.png"
+        />
+        <NuxtImg
+          width="244"
+          height="156"
+          class="rounded-3xl"
+          src="gallery/gallery-3.png"
+        />
+        <NuxtImg
+          width="244"
+          height="156"
+          class="rounded-3xl"
+          src="gallery/gallery-4.png"
+        />
+        <NuxtImg
+          width="244"
+          height="156"
+          class="rounded-3xl"
+          src="gallery/gallery-5.png"
+        />
+        <NuxtImg
+          width="244"
+          height="156"
+          class="rounded-3xl"
+          src="gallery/gallery-6.png"
+        />
+      </CarouselWrapper>
     </BlockWrapper>
 
     <!--  НАШІ ЦІННОСТІ 1 -->

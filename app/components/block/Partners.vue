@@ -13,7 +13,7 @@ import CarouselWrapper from '~/components/CarouselWrapper.vue';
       {{ $t('team.title') }}
     </template>
 
-    <CarouselWrapper>
+    <CarouselWrapper class="h-[172px]">
       <NuxtImg
         width="243"
         height="108"

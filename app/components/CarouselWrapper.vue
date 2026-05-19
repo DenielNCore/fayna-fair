@@ -203,7 +203,7 @@ watch(() => props.speed, () => {
 <template>
   <div
     ref="wrapperRef"
-    class="relative w-full overflow-hidden"
+    class="relative w-full overflow-hidden bg-gray-50 flex items-center"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >

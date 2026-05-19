@@ -155,8 +155,13 @@ import IconArrow from 'assets/arrow.svg';
       />
     </div>
 
-    <div class="max-w-[1014px] w-full bg-blue-300">
-      VIDEO
+    <!--  ВІДЕО  -->
+    <div>
+      <NuxtImg
+        width="1014"
+        height="570"
+        src="video.png"
+      />
     </div>
   </BlockWrapper>
 </template>
