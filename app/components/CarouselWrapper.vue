@@ -3,6 +3,7 @@ import {
   cloneVNode,
   Comment,
   defineComponent,
+  Fragment,
   onBeforeUnmount,
   onMounted,
   nextTick,
@@ -41,14 +42,27 @@ const VNodeRenderer = defineComponent({
   },
 });
 
+function flattenNodes(nodes: VNode[]): VNode[] {
+  const result: VNode[] = [];
+
+  nodes.forEach((node) => {
+    if (node.type === Comment) return;
+
+    if (node.type === Fragment && Array.isArray(node.children)) {
+      result.push(...flattenNodes(node.children as VNode[]));
+      return;
+    }
+
+    if (typeof node.children === 'string' && node.children.trim().length === 0) return;
+    result.push(node);
+  });
+
+  return result;
+}
+
 const baseSlides = computed(() => {
   const nodes = slots.default?.() ?? [];
-  return nodes
-    .filter(node => node.type !== Comment)
-    .filter((node) => {
-      if (typeof node.children !== 'string') return true;
-      return node.children.trim().length > 0;
-    })
+  return flattenNodes(nodes)
     .map((node, index) => cloneVNode(node, { key: `slide-${index}` }));
 });
 

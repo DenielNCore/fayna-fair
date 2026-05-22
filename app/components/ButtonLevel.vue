@@ -35,7 +35,7 @@ const styleClasses: Record<TButtonType, TButtonStyles> = {
   },
 
   3: {
-    normal: 'bg-green-700 text-gray-50 text-button px-2 py-4 h-[52px]',
+    normal: 'bg-green-500 text-gray-50 text-button px-2 py-4 w-[342px] h-[64px]',
     hover: 'hover:bg-green-700/90',
     active: 'active:translate-y-[1px]',
     disabled: 'disabled:pointer-events-none disabled:bg-gray-800 disabled:text-gray-500/50',

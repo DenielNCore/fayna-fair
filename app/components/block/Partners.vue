@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CarouselWrapper from '~/components/CarouselWrapper.vue';
+const pStore = usePartnersStore();
 
 // const list = [
 //   { img: '/member-photo-1.png', name: 'Катерина', position: 'Волонтер', href: 'https://instagram.com' },
@@ -14,30 +14,12 @@ import CarouselWrapper from '~/components/CarouselWrapper.vue';
     </template>
 
     <CarouselWrapper class="h-[172px]">
-      <NuxtImg
-        width="243"
-        height="108"
-        src="partner.png"
-      />
-      <NuxtImg
-        width="243"
-        height="108"
-        src="partner.png"
-      />
-      <NuxtImg
-        width="243"
-        height="108"
-        src="partner.png"
-      />
-      <NuxtImg
-        width="243"
-        height="108"
-        src="partner.png"
-      />
-      <NuxtImg
-        width="243"
-        height="108"
-        src="partner.png"
+      <PartnerLogo
+        v-for="partner in pStore.list"
+        :key="partner.src"
+        :src="partner.src"
+        :height="partner.height"
+        bordered
       />
     </CarouselWrapper>
 
