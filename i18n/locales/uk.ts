@@ -141,6 +141,26 @@ export default {
       description: 'Партнерська підтримка допомагає нам...',
     },
   },
+  donate: {
+    title: 'Підтримати Файний ярмарок ',
+    transfer: 'Банківський переказ',
+    copy: 'Скопіювати',
+    copied: 'Скопійовано',
+    mono: {
+      title: 'Mono Bank',
+      account: 'UA153204780000026004924942305',
+    },
+    privat: {
+      title: 'Приват Банк',
+      account: 'UA153204780000026004924942305',
+    },
+    paypal: {
+      title: 'PayPal',
+      email: 'Email',
+      account: 'Email{at}gmail.com',
+    },
+
+  },
   footer: {
     copyright: '© 2026 Файний ярмарок. Зроблено сусідами для перемоги.',
     donate: 'Задонатити',
