@@ -8,6 +8,19 @@ const reportInfo = computed(() => Array.from({ length: 3 }, (_, index) => {
     text: t(`report.info.${key}.text`),
   };
 }));
+
+const reportPhotos = [
+  '/report/report-1.png',
+  '/report/report-2.png',
+  '/report/report-1.png',
+  '/report/report-2.png',
+  '/report/report-1.png',
+  '/report/report-2.png',
+  '/report/report-1.png',
+  '/report/report-2.png',
+  '/report/report-1.png',
+  '/report/report-2.png',
+];
 </script>
 
 <template>
@@ -31,8 +44,15 @@ const reportInfo = computed(() => Array.from({ length: 3 }, (_, index) => {
       </div>
     </div>
 
-    <div>
-      //
+    <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <NuxtImg
+        v-for="(photo, index) in reportPhotos"
+        :key="photo"
+        :src="photo"
+        :alt="`${$t('gallery.title')} ${index + 1}`"
+        class="h-[315px] w-full rounded-3xl object-cover"
+        loading="lazy"
+      />
     </div>
 
     <DonateReminder>
