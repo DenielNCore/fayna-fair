@@ -18,17 +18,14 @@ const pStore = usePartnersStore();
       />
     </div>
 
-    <div class="bg-green-100 rounded-2xl p-16 max-md:p-4 w-full flex max-md:flex-col max-md:gap-6 justify-between items-center">
-      <div class="w-1/2 max-md:w-full text-subtitle1 font-semibold max-md:font-medium">
+    <DonateReminder>
+      <template #description>
         {{ $t('partners.page.description') }}
-      </div>
-
-      <div class="w-1/2 max-md:w-full flex justify-end max-md:justify-center">
-        <ButtonLevel type="3">
-          {{ $t('partners.btn') }}
-        </ButtonLevel>
-      </div>
-    </div>
+      </template>
+      <template #btn>
+        {{ $t('partners.btn') }}
+      </template>
+    </DonateReminder>
   </BlockWrapper>
 </template>
 
