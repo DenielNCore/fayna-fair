@@ -50,14 +50,19 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <ButtonLevel @click="handleCopyClick">
+  <ButtonLevel
+    class="max-md:hidden"
+    @click="handleCopyClick"
+  >
     <div class="flex gap-4 items-center font-bold">
       <template v-if="!isCopied">
-        <div>{{ $t('donate.copy') }}</div>
+        <div class="max-md:hidden">
+          {{ $t('donate.copy') }}
+        </div>
         <IconCopy />
       </template>
       <template v-else>
-        <div class="text-green-700">
+        <div class="text-green-700 max-md:hidden">
           {{ $t('donate.copied') }}
         </div>
         <IconDone />

@@ -40,7 +40,7 @@ const isOpen = ref(false);
       }"
       class="bg-gray-50 max-md:flex max-md:flex-col max-md:justify-between px-3 py-2 rounded-xl drop-shadow-md transition-all duration-300"
     >
-      <div class="h-[50px] flex gap-6 justify-between items-center">
+      <div class="h-[50px] flex gap-6 max-md:gap-4 justify-between items-center">
         <a href="/">
           <IconLogo
             class="h-[54px] min-w-[242px] cursor-pointer max-md:hidden"
