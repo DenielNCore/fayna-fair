@@ -25,6 +25,8 @@ const pStore = usePartnersStore();
 
     <ButtonLevel
       class="font-bold px-8"
+      href="/partners/Спонсорські_пакети_Файний_Ярмарок.pdf"
+      target="_blank"
       type="3"
     >
       {{ $t('partners.btn') }}

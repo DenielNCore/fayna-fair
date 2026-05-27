@@ -9,7 +9,11 @@
     </div>
 
     <div class="w-1/2 max-md:w-full flex justify-end max-md:justify-center">
-      <ButtonLevel type="3">
+      <ButtonLevel
+        href="/partners/Спонсорські_пакети_Файний_Ярмарок.pdf"
+        target="_blank"
+        type="3"
+      >
         <slot name="btn" />
       </ButtonLevel>
     </div>
