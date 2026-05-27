@@ -8,7 +8,7 @@ const { t } = useI18n();
 const links = computed(() => [
   {
     name: t('header.links.about'),
-    href: '/about',
+    href: '/report',
   },
   {
     name: t('header.links.program'),
@@ -16,7 +16,7 @@ const links = computed(() => [
   },
   {
     name: t('header.links.help'),
-    href: '/help',
+    href: '/donate',
   },
   {
     name: t('header.links.gallery'),

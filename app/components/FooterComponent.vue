@@ -13,7 +13,7 @@ import IconLogo from 'assets/logo-footer.svg';
     <InstagramBtn href="https://www.instagram.com/" />
 
     <ButtonLevel
-      class="fixed bottom-6 md:hidden w-[calc(100%-32px)] "
+      class="fixed bottom-4 md:hidden w-[calc(100%-32px)] "
       type="3"
     >
       {{ $t('footer.donate') }}

@@ -125,7 +125,7 @@ const ourValues = computed(() => [
           class="bg-gray-50 p-6 flex flex-col gap-8 w-1/4 max-xl:w-full rounded-3xl"
         >
           <NuxtImg
-            class="h-16 w-fit"
+            class="h-16 w-16"
             :src="overValue.img"
           />
           <div class="text-subtitle2 font-medium">

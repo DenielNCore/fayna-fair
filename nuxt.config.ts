@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-svgo',
   ],
-  ssr: false,
+  ssr: true, // Потрібно для API routes
   devtools: { enabled: true },
 
   app: {
@@ -38,7 +38,13 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Make environment variables accessible here
+    // Private keys (server-side only)
+    doSpacesKey: process.env.DO_SPACES_KEY,
+    doSpacesSecret: process.env.DO_SPACES_SECRET,
+    doSpacesBucket: process.env.DO_SPACES_BUCKET,
+    doSpacesRegion: process.env.DO_SPACES_REGION || 'fra1',
+
+    // Public keys (available on client)
     public: {
       ASSETS_URL: process.env.ASSETS_URL,
       DB_URL: process.env.DB_URL,

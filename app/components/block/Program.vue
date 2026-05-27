@@ -11,7 +11,7 @@ const eventList = computed(() => Array.from({ length: 10 }, (_, index) => {
 </script>
 
 <template>
-  <BlockWrapper class="">
+  <BlockWrapper>
     <template #title>
       {{ $t('program.title') }}
     </template>

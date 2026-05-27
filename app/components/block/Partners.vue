@@ -10,7 +10,7 @@ const pStore = usePartnersStore();
 <template>
   <BlockWrapper class="px-0 max-md:px-0">
     <template #title>
-      {{ $t('team.title') }}
+      {{ $t('partners.title') }}
     </template>
 
     <CarouselWrapper class="h-[172px]">

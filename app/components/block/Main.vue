@@ -3,7 +3,7 @@ import IconArrow from 'assets/arrow.svg';
 </script>
 
 <template>
-  <div class="mx-12 bg-green-100 flex max-md:flex-col max-md:gap-16 items-center rounded-[32px] p-12 max-md:p-4 max-md:pt-8">
+  <div class="mx-12 max-md:mx-4 bg-green-100 flex max-md:flex-col max-md:gap-16 items-center rounded-[32px] p-12 max-md:p-4 max-md:pt-8">
     <div class="w-1/2 flex flex-col gap-9 max-md:w-full">
       <div class="text-green-700 text-subtitle2 font-medium">
         {{ $t('home.hero.subtitle') }}
