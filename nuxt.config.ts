@@ -79,13 +79,10 @@ export default defineNuxtConfig({
     global: true,
     svgoConfig: {
       plugins: [
+        'preset-default',
         {
-          name: 'preset-default',
-          params: {
-            overrides: {
-              removeViewBox: false,
-            },
-          },
+          name: 'removeViewBox',
+          active: false,
         },
       ],
     },
