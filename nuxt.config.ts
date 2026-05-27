@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: 'Garage',
+      title: 'Файний Ярмарок',
       meta: [
         { name: 'description', content: 'Благодійний ярмарок на території ЖК Файна Таун' },
       ],

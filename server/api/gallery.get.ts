@@ -1,17 +1,27 @@
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
 
-const config = useRuntimeConfig();
+export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig(event);
 
-const s3Client = new S3Client({
-  endpoint: `https://${config.doSpacesRegion}.digitaloceanspaces.com`,
-  region: config.doSpacesRegion,
-  credentials: {
-    accessKeyId: config.doSpacesKey,
-    secretAccessKey: config.doSpacesSecret,
-  },
-});
+  // Перевіряємо чи налаштовані змінні
+  if (!config.doSpacesKey || !config.doSpacesSecret || !config.doSpacesBucket) {
+    console.warn('S3 credentials not configured, returning empty gallery');
+    return {
+      success: true,
+      photos: [],
+      warning: 'S3 not configured',
+    };
+  }
 
-export default defineEventHandler(async () => {
+  const s3Client = new S3Client({
+    endpoint: `https://${config.doSpacesRegion}.digitaloceanspaces.com`,
+    region: config.doSpacesRegion,
+    credentials: {
+      accessKeyId: config.doSpacesKey,
+      secretAccessKey: config.doSpacesSecret,
+    },
+  });
+
   try {
     const command = new ListObjectsV2Command({
       Bucket: config.doSpacesBucket,
