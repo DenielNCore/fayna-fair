@@ -25,7 +25,7 @@ const pStore = usePartnersStore();
 
     <ButtonLevel
       class="font-bold px-8"
-      href="/partners/Спонсорські_пакети_Файний_Ярмарок.pdf"
+      href="/partners/sponsor-packages.pdf"
       target="_blank"
       type="3"
     >

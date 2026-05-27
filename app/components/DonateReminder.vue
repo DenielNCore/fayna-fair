@@ -10,7 +10,7 @@
 
     <div class="w-1/2 max-md:w-full flex justify-end max-md:justify-center">
       <ButtonLevel
-        href="/partners/Спонсорські_пакети_Файний_Ярмарок.pdf"
+        href="/partners/sponsor-packages.pdf"
         target="_blank"
         type="3"
       >
