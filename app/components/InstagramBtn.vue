@@ -10,6 +10,6 @@ defineProps<{ href: string }>();
     target="_blank"
     class="bg-green-100 w-[44px] h-[44px] rounded-full hover:bg-green-100/80"
   >
-    <IconInstagram class=" " />
+    <IconInstagram class="" />
   </ButtonLevel>
 </template>

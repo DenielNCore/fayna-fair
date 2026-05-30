@@ -3,8 +3,8 @@ defineProps<{ title: string; text: string; num: string }>();
 </script>
 
 <template>
-  <div class="rounded-3xl bg-gray-50 p-6 w-[334px] flex flex-col gap-8 relative">
-    <div class="text-gray-50 text-subtitle1 font-semibold w-20 h-20 bg-green-700 rounded-full flex justify-center items-center">
+  <div class="rounded-3xl bg-gray-50 p-6 w-[334px] flex flex-col gap-4 relative">
+    <div class="text-gray-50 text-subtitle1 font-semibold w-14 h-14 bg-green-700 rounded-full flex justify-center items-center">
       {{ num }}
     </div>
     <div class="text-subtitle2 font-medium">

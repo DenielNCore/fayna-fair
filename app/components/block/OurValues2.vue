@@ -7,7 +7,7 @@ import IconArrow from 'assets/arrow.svg';
     <template #title>
       {{ $t('valuesFlow.title') }}
     </template>
-    <div class="flex gap-x-8 gap-y-10 flex-wrap justify-center max-xl:hidden ">
+    <div class="flex gap-x-8 gap-y-10 flex-wrap justify-center max-xl:hidden max-w-[1200px]">
       <PointOurValue
         num="1"
         :title="$t('valuesFlow.1.title')"

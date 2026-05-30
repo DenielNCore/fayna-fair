@@ -37,6 +37,11 @@ const ourValues = computed(() => [
     title: t('home.values.fourth.title'),
     text: t('home.values.fourth.text'),
   },
+  {
+    img: '/goal-4.png',
+    title: t('home.values.fifth.title'),
+    text: t('home.values.fifth.text'),
+  },
 ]);
 </script>
 
@@ -59,7 +64,7 @@ const ourValues = computed(() => [
         <div
           v-for="initiative in initiatives"
           :key="initiative.title"
-          class="bg-gray-50 rounded-3xl p-6 flex flex-col gap-8 w-1/3 max-md:w-full"
+          class="bg-gray-50 rounded-3xl p-6 flex flex-col gap-4 w-1/3 max-md:w-full"
         >
           <div class="text-subtitle1 font-semibold">
             {{ initiative.title }}
@@ -122,7 +127,7 @@ const ourValues = computed(() => [
           v-for="overValue in ourValues"
           :key="overValue.title"
 
-          class="bg-gray-50 p-6 flex flex-col gap-8 w-1/4 max-xl:w-full rounded-3xl"
+          class="bg-gray-50 p-6 flex flex-col gap-4 w-1/4 max-xl:w-full rounded-3xl"
         >
           <NuxtImg
             class="h-16 w-16"

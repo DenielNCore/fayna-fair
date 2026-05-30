@@ -11,8 +11,8 @@ defineProps<{ img: string; name: string; position: string; href: string }>();
     <NuxtImg
       :src="img"
       width="324"
-      height="404"
-      class="w-[324px] h-[400px]"
+      height="324"
+      class="w-[324px] h-[324px]"
     />
     <div class="py-6 px-9">
       <div class="text-subtitle2 font-medium">
