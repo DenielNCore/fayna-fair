@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import {
-  cloneVNode,
-  Comment,
-  defineComponent,
-  Fragment,
   onBeforeUnmount,
   onMounted,
   nextTick,
-  type PropType,
-  type VNode,
 } from 'vue';
 
 const props = withDefaults(defineProps<{
@@ -21,99 +15,40 @@ const props = withDefaults(defineProps<{
   pauseOnHover: false,
 });
 
-const slots = useSlots();
 const wrapperRef = ref<HTMLElement | null>(null);
-const measureSlideElements = ref<HTMLElement[]>([]);
-const slideWidths = ref<number[]>([]);
+const trackRef = ref<HTMLElement | null>(null);
 const containerWidth = ref(0);
+const contentWidth = ref(0);
 const isPaused = ref(false);
 const offsetX = ref(0);
+const isReady = ref(false);
 
-const VNodeRenderer = defineComponent({
-  name: 'VNodeRenderer',
-  props: {
-    vnode: {
-      type: Object as PropType<VNode>,
-      required: true,
-    },
-  },
-  setup(localProps) {
-    return () => localProps.vnode;
-  },
-});
-
-function flattenNodes(nodes: VNode[]): VNode[] {
-  const result: VNode[] = [];
-
-  nodes.forEach((node) => {
-    if (node.type === Comment) return;
-
-    if (node.type === Fragment && Array.isArray(node.children)) {
-      result.push(...flattenNodes(node.children as VNode[]));
-      return;
-    }
-
-    if (typeof node.children === 'string' && node.children.trim().length === 0) return;
-    result.push(node);
-  });
-
-  return result;
-}
-
-const baseSlides = computed(() => {
-  const nodes = slots.default?.() ?? [];
-  return flattenNodes(nodes)
-    .map((node, index) => cloneVNode(node, { key: `slide-${index}` }));
-});
-
-const slidesCount = computed(() => baseSlides.value.length);
-
-const sequenceContentWidth = computed(() => {
-  if (slidesCount.value === 0) return 0;
-  const itemsWidth = slideWidths.value.reduce((sum, width) => sum + width, 0);
-  const gapsWidth = props.gap * Math.max(slidesCount.value - 1, 0);
-  return itemsWidth + gapsWidth;
+const canScroll = computed(() => {
+  if (!isReady.value) return false;
+  if (containerWidth.value <= 0) return false;
+  if (contentWidth.value <= 0) return false;
+  return contentWidth.value > containerWidth.value + 1;
 });
 
 const sequenceAdvance = computed(() => {
-  if (slidesCount.value === 0) return 0;
-  return sequenceContentWidth.value + props.gap;
-});
-
-const canScroll = computed(() => {
-  if (slidesCount.value <= 0) return false;
-  if (containerWidth.value <= 0) return false;
-  return sequenceContentWidth.value > containerWidth.value + 1;
-});
-
-const renderedSlides = computed(() => {
-  if (!canScroll.value) return baseSlides.value;
-
-  const left = baseSlides.value.map((slide, index) => cloneVNode(slide, { key: `left-${index}` }));
-  const center = baseSlides.value.map((slide, index) => cloneVNode(slide, { key: `center-${index}` }));
-  const right = baseSlides.value.map((slide, index) => cloneVNode(slide, { key: `right-${index}` }));
-
-  return [...left, ...center, ...right];
+  return contentWidth.value + props.gap;
 });
 
 const trackStyle = computed(() => ({
   'column-gap': `${props.gap}px`,
-  'transform': `translateX(-${canScroll.value ? offsetX.value : 0}px)`,
+  'transform': canScroll.value ? `translateX(-${offsetX.value}px)` : 'none',
 }));
 
 function measureLayout() {
   const nextContainerWidth = wrapperRef.value?.getBoundingClientRect().width ?? 0;
-  const nextSlideWidths = measureSlideElements.value.map(el => el.getBoundingClientRect().width);
+  const nextContentWidth = trackRef.value?.scrollWidth ?? 0;
 
-  if (Math.abs(nextContainerWidth - containerWidth.value) > 0.5) {
-    containerWidth.value = nextContainerWidth;
-  }
+  containerWidth.value = nextContainerWidth;
+  // Content width is for one set of slides (total / 3)
+  contentWidth.value = canScroll.value ? nextContentWidth / 3 : nextContentWidth;
 
-  const hasSameWidths = nextSlideWidths.length === slideWidths.value.length
-    && nextSlideWidths.every((width, index) => Math.abs(width - (slideWidths.value[index] ?? 0)) <= 0.5);
-
-  if (!hasSameWidths) {
-    slideWidths.value = nextSlideWidths;
+  if (nextContainerWidth > 0 && nextContentWidth > 0) {
+    isReady.value = true;
   }
 }
 
@@ -173,7 +108,7 @@ function handleMouseLeave() {
   isPaused.value = false;
 }
 
-onMounted(() => {
+onMounted(async () => {
   resizeObserver = new ResizeObserver(() => {
     measureLayout();
   });
@@ -183,6 +118,8 @@ onMounted(() => {
   }
 
   window.addEventListener('resize', onWindowResize);
+
+  await nextTick();
   measureLayout();
 });
 
@@ -191,11 +128,6 @@ onBeforeUnmount(() => {
   resizeObserver?.disconnect();
   window.removeEventListener('resize', onWindowResize);
 });
-
-watch(() => [props.gap, slidesCount.value], async () => {
-  await nextTick();
-  measureLayout();
-}, { immediate: true });
 
 watch(canScroll, (enabled) => {
   if (!enabled) {
@@ -221,33 +153,21 @@ watch(() => props.speed, () => {
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
-    <div class="absolute invisible pointer-events-none -z-10">
-      <div
-        class="flex"
-        :style="{ 'column-gap': `${gap}px` }"
-      >
-        <div
-          v-for="(slide, index) in baseSlides"
-          :key="`measure-${index}`"
-          ref="measureSlideElements"
-          class="shrink-0"
-        >
-          <VNodeRenderer :vnode="slide" />
-        </div>
-      </div>
-    </div>
-
     <div
+      ref="trackRef"
       class="flex"
       :style="trackStyle"
     >
-      <div
-        v-for="(slide, index) in renderedSlides"
-        :key="slide.key ?? `slide-${index}`"
-        class="shrink-0"
-      >
-        <VNodeRenderer :vnode="slide" />
-      </div>
+      <!-- First copy -->
+      <slot />
+      <!-- Second copy (for infinite scroll) -->
+      <template v-if="canScroll">
+        <slot />
+      </template>
+      <!-- Third copy (for infinite scroll) -->
+      <template v-if="canScroll">
+        <slot />
+      </template>
     </div>
   </div>
 </template>

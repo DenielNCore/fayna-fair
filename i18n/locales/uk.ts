@@ -6,7 +6,7 @@ export default {
     links: {
       about: 'Хто ми',
       program: 'Програма',
-      help: 'Допомога армії',
+      help: 'Допомога війську',
       gallery: 'Галерея',
       partners: 'Партнерам',
     },
