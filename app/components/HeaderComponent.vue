@@ -7,20 +7,21 @@ const { t } = useI18n();
 
 const links = computed(() => [
   {
-    name: t('header.links.about'),
-    href: '/report',
-  },
-  {
     name: t('header.links.program'),
     href: '/program',
   },
+  {
+    name: t('header.links.gallery'),
+    href: '/gallery',
+  },
+
   {
     name: t('header.links.help'),
     href: '/donate',
   },
   {
-    name: t('header.links.gallery'),
-    href: '/gallery',
+    name: t('header.links.about'),
+    href: '/report',
   },
   {
     name: t('header.links.partners'),
@@ -66,6 +67,7 @@ const isOpen = ref(false);
           <ButtonLevel
             class="w-[216px]"
             type="2"
+            href="/donate"
           >
             {{ t('header.support') }}
           </ButtonLevel>
@@ -93,6 +95,7 @@ const isOpen = ref(false);
           <ButtonLevel
             class="w-[216px]"
             type="2"
+            href="/donate"
           >
             {{ t('header.support') }}
           </ButtonLevel>

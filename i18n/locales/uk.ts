@@ -4,11 +4,11 @@ export default {
   },
   header: {
     links: {
-      about: 'Хто ми',
+      about: 'Звіти',
       program: 'Програма',
-      help: 'Допомога війську',
+      help: 'Допомогти війську',
       gallery: 'Галерея',
-      partners: 'Партнерам',
+      partners: 'Партнери',
     },
     support: 'Підтримати',
   },
